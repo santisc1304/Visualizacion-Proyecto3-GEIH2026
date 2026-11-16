@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Equipo_Sandoval_Ramos_Proyecto3"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1248dd25-55f6-4958-81a0-dbabfd5781ba"
+  }
+}

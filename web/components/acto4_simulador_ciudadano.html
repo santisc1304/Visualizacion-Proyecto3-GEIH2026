@@ -1,0 +1,76 @@
+<!-- acto4_simulador_ciudadano.html - Acto 4: Simulador Ciudadano Interactivo y Plotly -->
+<section id="simulador" class="story-act" style="background: #FFFFFF;">
+  <div class="container">
+    <span class="act-badge">Acto 4 · Tu Agencia (Simulador Plotly & JavaScript)</span>
+    <h2 class="takeaway-title">Calcula tu Estabilidad: ¿Dónde estás Parado Tú?</h2>
+    <p class="takeaway-subtitle">Ingresa tu sector, tu rango de edad y tu departamento para diagnosticar tu perfil frente a la evidencia estadística nacional.</p>
+
+    <!-- Caja del Simulador Interactivo -->
+    <div class="simulator-wrapper">
+      <div class="simulator-controls">
+        <div class="form-group">
+          <label for="sim-sector">1. Selecciona tu Actividad Económica:</label>
+          <select id="sim-sector" class="form-select" aria-label="Sector Económico"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="sim-age">2. Tu Rango de Edad:</label>
+          <select id="sim-age" class="form-select" aria-label="Rango de Edad"></select>
+        </div>
+
+        <div class="form-group">
+          <label for="sim-dept">3. Departamento de Residencia:</label>
+          <select id="sim-dept" class="form-select" aria-label="Departamento"></select>
+        </div>
+      </div>
+
+      <!-- Resultados Dinámicos Calculados -->
+      <div class="simulator-results">
+        <div class="result-card">
+          <div class="metric-label">Ingreso Típico (Mediana)</div>
+          <div id="res-mediana" class="metric-big" style="font-size: 1.85rem; color: var(--color-primary); margin-top: 0.5rem;">$0 COP</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">El 50% gana más y el 50% gana menos</div>
+        </div>
+
+        <div class="result-card">
+          <div class="metric-label">Ingreso Promedio Mensual</div>
+          <div id="res-promedio" class="metric-big" style="font-size: 1.85rem; color: var(--color-primary); margin-top: 0.5rem;">$0 COP</div>
+          <div id="res-brecha" style="font-size: 0.8rem; font-weight: 700; margin-top: 0.25rem;">+0% vs Asalariados</div>
+        </div>
+
+        <div class="result-card">
+          <div class="metric-label">Predictibilidad Mensual</div>
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--color-text-body); margin-top: 0.5rem;">
+            CV: <span id="res-cv">0.00</span>
+          </div>
+          <span id="res-estatus" class="status-pill stable">Calculando...</span>
+        </div>
+
+        <div class="result-card">
+          <div class="metric-label">Colchón de Reserva Sugerido</div>
+          <div id="res-colchon" style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-top: 0.65rem;">3 a 5 meses</div>
+          <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">Fondo de emergencia recomendado</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+        <div id="res-dept-info" style="font-size: var(--text-sm); color: var(--color-text-body); line-height: 1.5;"></div>
+        <div id="res-muestra" style="font-size: var(--text-xs); color: var(--color-text-muted); font-style: italic;"></div>
+      </div>
+    </div>
+
+    <!-- Módulo Plotly Embebido -->
+    <div style="margin-top: 3.5rem;">
+      <h3 style="font-size: var(--text-xl); color: var(--color-primary); margin-bottom: 0.5rem;">
+        Cuadrante de Riesgo vs. Retorno por Actividades (Plotly Interactivo)
+      </h3>
+      <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: 1.25rem;">
+        Pasa el cursor por encima de cada burbuja para ver los detalles de los 44 perfiles analizados y ubicar el cuadrante de tu oficio:
+      </p>
+      <div class="iframe-container" style="height: 680px;">
+        <iframe src="assets/interactive/simulador_independientes_plotly.html" title="Simulador de Riesgo vs Retorno Plotly" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+

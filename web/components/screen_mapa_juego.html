@@ -1,0 +1,387 @@
+<!-- PANTALLA 3: EL MAPA DEL TESORO 2D CON CÁMARA DINÁMICA Y RELIEVE -->
+<section id="screen-mapa" class="game-screen" aria-label="Mapa del Tesoro Interactivo 2D">
+  <!-- HUD SUPERIOR DE NAVEGACIÓN Y PROGRESO -->
+  <header class="flight-hud">
+    <div class="hud-left">
+      <button id="btn-hud-briefing" class="hud-btn-ghost" type="button" title="Ver instrucciones de vuelo" onclick="window.TreasureGame && window.TreasureGame.showScreen('contexto')">
+        📜 Bitácora
+      </button>
+      <div class="hud-brand">
+        <span class="hud-title">🗺️ EXPEDICIÓN GEIH 2026: EL VIAJE DEL HÉROE</span>
+        <span id="hud-progress-text" class="hud-sub">Estaciones X: 0/6 • Obstáculos inspeccionados: 0/5</span>
+      </div>
+    </div>
+
+    <!-- Acceso directo a las 6 X rojas -->
+    <nav class="hud-quick-nav" aria-label="Saltos rápidos a estaciones del mapa">
+      <button class="hud-x-pill" data-target-node="x1" type="button" title="Estación 1: El Mundo Ordinario (Power BI)">❌ 1. Power BI</button>
+      <button class="hud-x-pill" data-target-node="x2" type="button" title="Estación 2: El Umbral del Promedio (Python)">❌ 2. Distribución</button>
+      <button class="hud-x-pill" data-target-node="x3" type="button" title="Estación 3: El Corredor Dorado (Python)">❌ 3. Ciclo Vida</button>
+      <button class="hud-x-pill" data-target-node="x4" type="button" title="Estación 4: Geografía del Riesgo (Mapas en R)">❌ 4. Mapas R</button>
+      <button class="hud-x-pill" data-target-node="x5" type="button" title="Estación 5: El Oráculo Ciudadano (Simulador + Plotly)">❌ 5. Simulador</button>
+      <button class="hud-x-pill" data-target-node="x6" type="button" title="Estación 6: El Elixir (Conclusiones y Cofre)">❌ 6. El Elixir</button>
+    </nav>
+
+    <div class="hud-right">
+      <button id="btn-next-waypoint" class="hud-btn-gold" type="button" title="Volar automáticamente a la siguiente estación X">
+        ✈️ Siguiente X
+      </button>
+    </div>
+  </header>
+
+  <!-- VENTANA DE CÁMARA 2D DEL JUEGO -->
+  <div id="treasure-map-viewport" class="treasure-map-viewport" tabindex="0" aria-label="Lienzo 2D del mapa del tesoro. Usa las flechas del teclado para volar por el mapa y Espacio sobre las X rojas.">
+
+    <!-- MUNDO 2D EXTENSO (3200 x 1800 px) QUE SE DESPLAZA CON LA AVIONETA -->
+    <div id="treasure-map-world" class="treasure-map-world">
+
+      <!-- CAPA SVG: MARES, BATIMETRÍA, RELIEVE TOPOGRÁFICO, CORDILLERAS, RÍOS, BOSQUES Y LUGARES -->
+      <svg class="treasure-map-svg" viewBox="0 0 3200 1800" width="3200" height="1800">
+        <defs>
+          <!-- Gradiente oceánico vintage -->
+          <radialGradient id="oceanGrad" cx="48%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#9EB7AC"/>
+            <stop offset="55%" stop-color="#84A196"/>
+            <stop offset="100%" stop-color="#5B7870"/>
+          </radialGradient>
+          <!-- Pergamino de tierra amarilla quemada -->
+          <radialGradient id="landParchment" cx="50%" cy="48%" r="60%">
+            <stop offset="0%" stop-color="#F6E6BD"/>
+            <stop offset="55%" stop-color="#E6C682"/>
+            <stop offset="88%" stop-color="#CA9A4E"/>
+            <stop offset="100%" stop-color="#AA7932"/>
+          </radialGradient>
+          <radialGradient id="highlandGrad" cx="45%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#EBD095"/>
+            <stop offset="100%" stop-color="#C89549"/>
+          </radialGradient>
+          <!-- Sombra costera de acantilado -->
+          <filter id="coastShadow" x="-8%" y="-8%" width="116%" height="116%">
+            <feDropShadow dx="8" dy="10" stdDeviation="10" flood-color="#2E443E" flood-opacity="0.55"/>
+          </filter>
+          <!-- Patrón de textura sutil de papel -->
+          <filter id="paperGrain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" result="noise"/>
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.06 0"/>
+          </filter>
+        </defs>
+
+        <!-- 1. MAR PROFUNDO Y BATIMETRÍA -->
+        <rect width="3200" height="1800" fill="url(#oceanGrad)"/>
+
+        <!-- Cuadrícula náutica y líneas de rumbo -->
+        <g stroke="#2C423B" stroke-opacity="0.20" stroke-width="1.2">
+          <line x1="0" y1="300" x2="3200" y2="300"/>
+          <line x1="0" y1="600" x2="3200" y2="600"/>
+          <line x1="0" y1="900" x2="3200" y2="900"/>
+          <line x1="0" y1="1200" x2="3200" y2="1200"/>
+          <line x1="0" y1="1500" x2="3200" y2="1500"/>
+          <line x1="400" y1="0" x2="400" y2="1800"/>
+          <line x1="800" y1="0" x2="800" y2="1800"/>
+          <line x1="1200" y1="0" x2="1200" y2="1800"/>
+          <line x1="1600" y1="0" x2="1600" y2="1800"/>
+          <line x1="2000" y1="0" x2="2000" y2="1800"/>
+          <line x1="2400" y1="0" x2="2400" y2="1800"/>
+          <line x1="2800" y1="0" x2="2800" y2="1800"/>
+          <!-- Líneas de rumbo desde la gran Rosa de los Vientos -->
+          <line x1="2850" y1="240" x2="0" y2="1120" stroke-dasharray="9 8"/>
+          <line x1="2850" y1="240" x2="350" y2="0" stroke-dasharray="9 8"/>
+          <line x1="2850" y1="240" x2="1150" y2="1800" stroke-dasharray="9 8"/>
+          <line x1="2850" y1="240" x2="2200" y2="1800" stroke-dasharray="9 8"/>
+        </g>
+
+        <!-- Olas marinas ilustradas -->
+        <g fill="none" stroke="#DCE8DE" stroke-width="2.2" stroke-linecap="round" opacity="0.45">
+          <path d="M 180,320 Q 205,305 230,320 T 280,320"/>
+          <path d="M 420,860 Q 445,845 470,860 T 520,860"/>
+          <path d="M 960,1180 Q 985,1165 1010,1180 T 1060,1180"/>
+          <path d="M 1030,720 Q 1055,705 1080,720 T 1130,720"/>
+          <path d="M 1520,250 Q 1545,235 1570,250 T 1620,250"/>
+          <path d="M 2180,1040 Q 2205,1025 2230,1040 T 2280,1040"/>
+          <path d="M 2580,290 Q 2605,275 2630,290 T 2680,290"/>
+          <path d="M 2840,1480 Q 2865,1465 2890,1480 T 2940,1480"/>
+          <path d="M 520,1640 Q 545,1625 570,1640 T 620,1640"/>
+        </g>
+
+        <!-- Zonas de aguas poco profundas (arrecifes / bajíos alrededor de las tierras) -->
+        <path d="M 120,1260 Q 260,1090 480,1180 T 660,1480 Q 430,1680 180,1600 Z" fill="#B7CBBF" opacity="0.55"/>
+        <path d="M 480,450 Q 670,250 930,380 T 1060,720 Q 790,880 510,760 Z" fill="#B7CBBF" opacity="0.55"/>
+        <path d="M 1090,740 Q 1400,560 1760,640 T 2180,1050 T 2650,1490 L 1880,1640 Q 1340,1680 1120,1360 Z" fill="#B7CBBF" opacity="0.52"/>
+        <path d="M 1710,280 Q 1980,160 2250,310 T 2260,600 Q 1960,690 1700,530 Z" fill="#B7CBBF" opacity="0.55"/>
+        <path d="M 2590,330 Q 2900,220 3100,450 L 3060,920 Q 2810,1080 2580,820 Z" fill="#B7CBBF" opacity="0.55"/>
+
+        <!-- 2. MASAS CONTINENTALES E ISLAS CON RELIEVE Y CURVAS DE NIVEL -->
+
+        <!-- Isla Suroeste: Puerto Promedio (X1) -->
+        <path d="M 155,1290 Q 275,1155 450,1215 T 585,1460 Q 430,1620 215,1560 Q 105,1440 155,1290 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4" filter="url(#coastShadow)"/>
+        <path d="M 205,1320 Q 300,1215 435,1265 T 520,1440 Q 400,1555 240,1510 Z"
+              fill="none" stroke="#9B6A2A" stroke-width="1.8" stroke-dasharray="5 4" opacity="0.65"/>
+
+        <!-- Península Noroeste: Cabo del Faro de la Mediana (X2) -->
+        <path d="M 530,480 Q 670,315 890,395 T 1015,690 Q 815,825 565,730 Q 470,605 530,480 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4" filter="url(#coastShadow)"/>
+        <path d="M 595,505 Q 705,385 855,445 T 940,655 Q 785,755 615,690 Z"
+              fill="none" stroke="#9B6A2A" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
+        <path d="M 655,545 Q 740,465 835,505 T 870,630 Q 770,690 665,640 Z"
+              fill="url(#highlandGrad)" stroke="#8B5A1E" stroke-width="1.5" opacity="0.75"/>
+
+        <!-- Gran Continente Central-Sur: Cordillera del Corredor Dorado (X3) hasta Meseta del Oráculo (X5) -->
+        <path d="M 1140,795 Q 1400,615 1745,675 Q 1930,720 2075,920 Q 2230,1045 2560,1070 Q 2710,1190 2645,1465 Q 2410,1625 2040,1555 Q 1630,1640 1245,1485 Q 1085,1235 1140,795 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4.5" filter="url(#coastShadow)"/>
+        <!-- Curvas de nivel topográficas (elevación escalonada) -->
+        <path d="M 1215,855 Q 1435,695 1720,745 Q 1890,790 2015,965 Q 2160,1085 2475,1120 Q 2585,1235 2530,1415 Q 2330,1535 2020,1485 Q 1650,1550 1300,1420 Q 1165,1200 1215,855 Z"
+              fill="none" stroke="#9A6826" stroke-width="2" stroke-dasharray="7 5" opacity="0.65"/>
+        <path d="M 1275,945 Q 1465,805 1690,855 Q 1815,955 1825,1160 Q 1790,1360 1535,1395 Q 1295,1375 1255,1170 Z"
+              fill="url(#highlandGrad)" stroke="#8A591D" stroke-width="2" opacity="0.82"/>
+        <path d="M 2275,1165 Q 2445,1135 2545,1255 Q 2565,1395 2425,1445 Q 2270,1435 2245,1295 Z"
+              fill="url(#highlandGrad)" stroke="#8A591D" stroke-width="1.8" opacity="0.78"/>
+
+        <!-- Archipiélago de los 33 Dominios (Norte-Centro: X4) -->
+        <g filter="url(#coastShadow)">
+          <path d="M 1765,330 Q 1935,215 2135,295 Q 2235,415 2145,555 Q 1975,620 1810,545 Q 1715,440 1765,330 Z"
+                fill="url(#landParchment)" stroke="#6B4214" stroke-width="4"/>
+          <path d="M 2165,245 Q 2255,210 2310,275 Q 2305,345 2225,360 Q 2145,325 2165,245 Z"
+                fill="url(#landParchment)" stroke="#6B4214" stroke-width="3"/>
+          <path d="M 1645,425 Q 1710,395 1745,455 Q 1730,520 1660,515 Q 1615,475 1645,425 Z"
+                fill="url(#landParchment)" stroke="#6B4214" stroke-width="3"/>
+          <path d="M 1835,360 Q 1945,280 2075,335 Q 2125,435 2050,510 Q 1925,545 1840,480 Z"
+                fill="none" stroke="#9B6A2A" stroke-width="1.6" stroke-dasharray="5 4"/>
+        </g>
+
+        <!-- Isla Noreste: Fortaleza del Elixir (X6) -->
+        <path d="M 2665,415 Q 2860,290 3045,410 Q 3120,575 3015,755 Q 2835,845 2685,720 Q 2595,565 2665,415 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4.5" filter="url(#coastShadow)"/>
+        <path d="M 2725,455 Q 2865,360 2995,445 Q 3040,565 2965,690 Q 2840,760 2735,665 Z"
+              fill="url(#highlandGrad)" stroke="#8B5A1E" stroke-width="2" stroke-dasharray="6 4"/>
+
+        <!-- 3. CORDILLERAS MONTAÑOSAS CON SOMBREADO Y CUMBRES NEVADAS -->
+        <g>
+          <!-- Cordillera Central (cerca de X3) -->
+          <g transform="translate(1240, 1020)">
+            <polygon points="0,120 55,15 110,120" fill="#A97432" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="55,15 110,120 55,120" fill="#7D4F19"/>
+            <polygon points="41,42 55,15 69,42 55,36" fill="#FFFDF7"/>
+            <polygon points="85,135 150,0 215,135" fill="#B57E39" stroke="#5C380E" stroke-width="2.2"/>
+            <polygon points="150,0 215,135 150,135" fill="#7A4C17"/>
+            <polygon points="131,38 150,0 169,38 150,29" fill="#FFFDF7"/>
+            <polygon points="180,125 240,25 300,125" fill="#A97432" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="240,25 300,125 240,125" fill="#7D4F19"/>
+            <polygon points="224,52 240,25 256,52 240,45" fill="#FFFDF7"/>
+          </g>
+          <!-- Cordillera Oriental (cerca de X5) -->
+          <g transform="translate(2260, 1180)">
+            <polygon points="0,95 45,15 90,95" fill="#B57E39" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="45,15 90,95 45,95" fill="#7D4F19"/>
+            <polygon points="68,105 120,0 172,105" fill="#C08840" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="120,0 172,105 120,105" fill="#7D4F19"/>
+            <polygon points="106,28 120,0 134,28 120,21" fill="#FFFDF7"/>
+          </g>
+          <!-- Cadena de Colinas Noroeste (cerca de X2) -->
+          <g transform="translate(615, 455)">
+            <polygon points="0,70 38,8 76,70" fill="#B57E39" stroke="#5C380E" stroke-width="1.8"/>
+            <polygon points="38,8 76,70 38,70" fill="#7D4F19"/>
+            <polygon points="56,75 95,15 134,75" fill="#A97432" stroke="#5C380E" stroke-width="1.8"/>
+            <polygon points="95,15 134,75 95,75" fill="#7D4F19"/>
+          </g>
+        </g>
+
+        <!-- 4. RÍOS SINUOSOS Y LAGUNAS -->
+        <g fill="none" stroke-linecap="round">
+          <!-- Río de la Experiencia (baja de la cordillera hasta el mar) -->
+          <path d="M 1450,1150 Q 1520,1250 1480,1365 T 1630,1520 T 1710,1625" stroke="#5E8C88" stroke-width="10" opacity="0.85"/>
+          <path d="M 1450,1150 Q 1520,1250 1480,1365 T 1630,1520 T 1710,1625" stroke="#9AC7C2" stroke-width="4" opacity="0.8"/>
+          <!-- Laguna Esmeralda -->
+          <ellipse cx="1870" cy="1340" rx="68" ry="38" fill="#6D9B95" stroke="#4D736E" stroke-width="2.5"/>
+          <path d="M 1870,1378 Q 1920,1470 1890,1585" stroke="#5E8C88" stroke-width="8" opacity="0.82"/>
+        </g>
+
+        <!-- 5. BOSQUES ILUSTRADOS (ARBOLES EN GRUPOS) -->
+        <g stroke="#2C421C" stroke-width="1.3">
+          <!-- Bosque de la Falacia (Centro, cerca de O3) -->
+          <g transform="translate(1545, 765)">
+            <circle cx="20" cy="25" r="18" fill="#5E7D41"/><circle cx="48" cy="18" r="20" fill="#4B6B31"/><circle cx="76" cy="28" r="17" fill="#6C8D4C"/>
+            <circle cx="34" cy="46" r="19" fill="#46632E"/><circle cx="62" cy="48" r="18" fill="#5E7D41"/><circle cx="96" cy="42" r="16" fill="#4B6B31"/>
+            <circle cx="10" cy="52" r="15" fill="#6C8D4C"/><circle cx="114" cy="25" r="15" fill="#5E7D41"/>
+          </g>
+          <!-- Selva Sur (alrededor de X3-X5) -->
+          <g transform="translate(1985, 1185)">
+            <circle cx="18" cy="22" r="17" fill="#5E7D41"/><circle cx="46" cy="16" r="21" fill="#4B6B31"/><circle cx="74" cy="28" r="18" fill="#6C8D4C"/>
+            <circle cx="32" cy="46" r="18" fill="#46632E"/><circle cx="62" cy="50" r="16" fill="#5E7D41"/>
+          </g>
+          <!-- Arboleda del Puerto (cerca de X1) -->
+          <g transform="translate(210, 1445)">
+            <circle cx="16" cy="20" r="14" fill="#5E7D41"/><circle cx="38" cy="15" r="16" fill="#4B6B31"/><circle cx="56" cy="26" r="14" fill="#6C8D4C"/>
+          </g>
+          <!-- Pinar del Faro (cerca de X2) -->
+          <g transform="translate(835, 515)">
+            <polygon points="15,0 3,28 27,28" fill="#46632E"/><polygon points="35,4 22,34 48,34" fill="#5E7D41"/><polygon points="55,2 43,30 67,30" fill="#4B6B31"/>
+          </g>
+        </g>
+
+        <!-- 6. LUGARES ILUSTRADOS Y HITOS CARTOGRÁFICOS -->
+        <!-- Barco Galeón en el Mar Occidental -->
+        <g transform="translate(460, 180)" opacity="0.85">
+          <path d="M 10,48 L 80,48 L 68,66 L 22,66 Z" fill="#6B3F16" stroke="#2A1808" stroke-width="2"/>
+          <line x1="45" y1="10" x2="45" y2="48" stroke="#2A1808" stroke-width="2.5"/>
+          <path d="M 46,12 Q 72,26 46,42 Z" fill="#FFFDF7" stroke="#784B16" stroke-width="1.5"/>
+          <path d="M 44,16 Q 22,28 44,40 Z" fill="#F6E6C2" stroke="#784B16" stroke-width="1.5"/>
+        </g>
+
+        <!-- Faro de la Mediana (junto a X2) -->
+        <g transform="translate(828, 560)">
+          <polygon points="12,38 24,38 21,8 15,8" fill="#FFFDF7" stroke="#2A1808" stroke-width="1.8"/>
+          <rect x="14" y="16" width="8" height="7" fill="#DC2626"/>
+          <circle cx="18" cy="6" r="5" fill="#FDE047" stroke="#2A1808" stroke-width="1.2"/>
+        </g>
+
+        <!-- Fortaleza del Elixir (junto a X6) -->
+        <g transform="translate(2955, 455)">
+          <rect x="0" y="14" width="44" height="28" fill="#C49A58" stroke="#4A2E0F" stroke-width="2"/>
+          <rect x="0" y="6" width="10" height="10" fill="#C49A58" stroke="#4A2E0F" stroke-width="1.5"/>
+          <rect x="17" y="6" width="10" height="10" fill="#C49A58" stroke="#4A2E0F" stroke-width="1.5"/>
+          <rect x="34" y="6" width="10" height="10" fill="#C49A58" stroke="#4A2E0F" stroke-width="1.5"/>
+          <path d="M 16,42 L 16,28 A 6,6 0 0,1 28,28 L 28,42 Z" fill="#4A2E0F"/>
+          <line x1="22" y1="-10" x2="22" y2="6" stroke="#2A1808" stroke-width="2"/>
+          <polygon points="22,-10 38,-5 22,0" fill="#DC2626"/>
+        </g>
+
+        <!-- Títulos Caligráficos de Mares, Cordilleras y Regiones -->
+        <text x="165" y="1140" fill="#2A1808" font-family="Georgia, serif" font-style="italic" font-size="25" font-weight="bold" opacity="0.7">Bahía de Puerto Promedio</text>
+        <text x="530" y="340" fill="#2A1808" font-family="Georgia, serif" font-style="italic" font-size="25" font-weight="bold" opacity="0.7">Mar del Umbral y Faro Mediana</text>
+        <text x="1220" y="1215" fill="#4A2E0F" font-family="Georgia, serif" font-style="italic" font-size="27" font-weight="bold" opacity="0.78">Cordillera del Corredor Dorado</text>
+        <text x="1485" y="742" fill="#2C421C" font-family="Georgia, serif" font-style="italic" font-size="24" font-weight="bold" opacity="0.82">Bosque de la Falacia Ecológica</text>
+        <text x="1770" y="235" fill="#1F3A34" font-family="Georgia, serif" font-style="italic" font-size="26" font-weight="bold" opacity="0.78">Archipiélago de los 33 Dominios (EPSG:9377)</text>
+        <text x="2280" y="1495" fill="#4A2E0F" font-family="Georgia, serif" font-style="italic" font-size="25" font-weight="bold" opacity="0.75">Meseta del Oráculo Ciudadano</text>
+        <text x="2680" y="365" fill="#4A2E0F" font-family="Georgia, serif" font-style="italic" font-size="26" font-weight="bold" opacity="0.8">Ciudadela del Elixir Final</text>
+
+        <!-- Rosa de los Vientos Monumental -->
+        <g transform="translate(2850, 240)">
+          <circle cx="0" cy="0" r="95" fill="#F6E6C2" fill-opacity="0.78" stroke="#6B4214" stroke-width="3"/>
+          <circle cx="0" cy="0" r="80" fill="none" stroke="#6B4214" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <polygon points="0,-90 14,-20 0,-32 -14,-20" fill="#DC2626"/>
+          <polygon points="0,90 14,20 0,32 -14,20" fill="#6B4214"/>
+          <polygon points="-90,0 -20,14 -32,0 -20,-14" fill="#6B4214"/>
+          <polygon points="90,0 20,14 32,0 20,-14" fill="#6B4214"/>
+          <circle cx="0" cy="0" r="10" fill="#F59E0B" stroke="#2A1808" stroke-width="2"/>
+          <text x="-8" y="-102" fill="#B91C1C" font-weight="bold" font-size="22" font-family="Georgia, serif">N</text>
+          <text x="-6" y="118" fill="#2A1808" font-weight="bold" font-size="18" font-family="Georgia, serif">S</text>
+          <text x="102" y="6" fill="#2A1808" font-weight="bold" font-size="18" font-family="Georgia, serif">E</text>
+          <text x="-120" y="6" fill="#2A1808" font-weight="bold" font-size="18" font-family="Georgia, serif">O</text>
+        </g>
+
+        <!-- 7. RUTA DEL TESORO (LÍNEA ROJA ENTRECORTADA CONECTANDO LAS 11 PARADAS EN 3200 x 1800) -->
+        <polyline
+          points="310,1410 560,1050 780,590 1090,930 1370,1290 1680,860 1960,440 2260,860 2490,1320 2750,950 2920,540"
+          fill="none"
+          stroke="#450A0A"
+          stroke-width="11"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="22 18"
+          opacity="0.28"
+        />
+        <polyline
+          id="treasure-route-line"
+          points="310,1410 560,1050 780,590 1090,930 1370,1290 1680,860 1960,440 2260,860 2490,1320 2750,950 2920,540"
+          fill="none"
+          stroke="#DC2626"
+          stroke-width="6.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="22 18"
+        />
+
+        <!-- Capa sutil de grano de pergamino -->
+        <rect width="3200" height="1800" filter="url(#paperGrain)" pointer-events="none"/>
+      </svg>
+
+      <!-- CAPA PARALLAX DE NUBES 2D -->
+      <div id="parallax-clouds-layer" class="parallax-clouds-layer" aria-hidden="true">
+        <div class="cloud-puff" style="left: 420px; top: 380px;"></div>
+        <div class="cloud-puff" style="left: 1180px; top: 240px;"></div>
+        <div class="cloud-puff" style="left: 1580px; top: 1180px;"></div>
+        <div class="cloud-puff" style="left: 2220px; top: 380px;"></div>
+        <div class="cloud-puff" style="left: 2740px; top: 1220px;"></div>
+      </div>
+
+      <!-- NODOS INTERACTIVOS DEL MAPA (6 X ROJAS + 5 OBSTÁCULOS) -->
+      <div id="map-nodes-layer" class="map-nodes-layer"></div>
+
+      <!-- VENTANITA RESUMIDA FLOTANTE AL PASAR EL CURSOR SOBRE UN OBSTÁCULO -->
+      <div id="obstacle-hover-card" class="obstacle-hover-card hidden" role="tooltip">
+        <div class="ohc-header">
+          <span id="ohc-icon" class="ohc-icon">🌀</span>
+          <div>
+            <span class="ohc-tag">OBSTÁCULO EN EL CAMINO</span>
+            <h4 id="ohc-title">Remolino del Promedio</h4>
+          </div>
+        </div>
+        <p class="ohc-row"><strong>⚠️ Altercado:</strong> <span id="ohc-problem"></span></p>
+        <p class="ohc-row ohc-sol"><strong>🛠️ Solución:</strong> <span id="ohc-solution"></span></p>
+      </div>
+
+      <!-- LA AVIONETA JUGABLE (BIPLANO "EXTERNADO I") -->
+      <div id="biplane-player" class="biplane-player" aria-label="Avioneta del jugador">
+        <div class="biplane-shadow"></div>
+        <div id="biplane-sprite" class="biplane-sprite">
+          <svg viewBox="0 0 120 120" width="72" height="72">
+            <line x1="8" y1="45" x2="26" y2="45" stroke="#FFFBEB" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <line x1="8" y1="75" x2="26" y2="75" stroke="#FFFBEB" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <polygon points="16,60 32,44 36,60 32,76" fill="#B91C1C" stroke="#450A0A" stroke-width="2"/>
+            <path d="M 24,52 L 88,50 C 98,50 104,55 104,60 C 104,65 98,70 88,70 L 24,68 Z" fill="#DC2626" stroke="#450A0A" stroke-width="2.5"/>
+            <rect x="46" y="14" width="26" height="92" rx="8" fill="#F59E0B" stroke="#450A0A" stroke-width="2.5"/>
+            <rect x="52" y="18" width="14" height="84" rx="5" fill="#FDE68A" opacity="0.55"/>
+            <circle cx="59" cy="28" r="6" fill="#0B3C5D" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="59" cy="92" r="6" fill="#0B3C5D" stroke="#FFFFFF" stroke-width="1.5"/>
+            <ellipse cx="44" cy="60" rx="8" ry="6" fill="#0B3C5D" stroke="#FDE68A" stroke-width="2"/>
+            <rect x="98" y="54" width="7" height="12" rx="2" fill="#334155" stroke="#0F172A" stroke-width="1.5"/>
+            <g class="propeller-spin" transform="translate(107, 60)">
+              <ellipse cx="0" cy="-14" rx="2.5" ry="13" fill="#E2E8F0" stroke="#475569" stroke-width="1"/>
+              <ellipse cx="0" cy="14" rx="2.5" ry="13" fill="#E2E8F0" stroke="#475569" stroke-width="1"/>
+              <circle cx="0" cy="0" r="3.5" fill="#F59E0B"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AVISO FLOTANTE DE PROXIMIDAD (SOLO PARA LAS X ROJAS) -->
+    <div id="proximity-banner" class="proximity-banner hidden" role="status" aria-live="polite">
+      <div class="proximity-glow-dot"></div>
+      <div class="proximity-info">
+        <span id="proximity-type" class="proximity-kicker">ESTACIÓN X ILUMINADA</span>
+        <strong id="proximity-title">Estación 1: El Mundo Ordinario</strong>
+      </div>
+      <button id="btn-open-active-node" class="btn-space-action" type="button">
+        Oprime <kbd>ESPACIO</kbd> para Entrar
+      </button>
+    </div>
+
+    <!-- MINI-MAPA RADAR DE POSICIÓN 2D -->
+    <div id="map-minimap" class="map-minimap" aria-label="Minimapa de ubicación en el mundo">
+      <div class="minimap-title">RADAR 2D</div>
+      <div id="minimap-canvas" class="minimap-canvas">
+        <div id="minimap-viewport-box" class="minimap-viewport-box"></div>
+        <div id="minimap-plane-dot" class="minimap-plane-dot"></div>
+      </div>
+    </div>
+
+    <!-- LEYENDA COMPACTA ABAJO A LA IZQUIERDA -->
+    <div class="map-legend-floating">
+      <div class="legend-row">
+        <span>❌</span>
+        <span><strong>X Rojas (1–6):</strong> Vuela cerca y oprime <kbd>ESPACIO</kbd> para abrir</span>
+      </div>
+      <div class="legend-row">
+        <span>🌀</span>
+        <span><strong>Obstáculos (1–5):</strong> Pasa el <strong>cursor encima</strong> para ver el resumen</span>
+      </div>
+      <div class="legend-row">
+        <span>✈️</span>
+        <span><strong>Flechas / Clic:</strong> El mundo 2D avanza y retrocede contigo</span>
+      </div>
+    </div>
+  </div>
+</section>

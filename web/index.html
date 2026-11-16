@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Mito de la Inestabilidad Independiente — Expedición Interactiva (GEIH 2026)</title>
+  <meta name="description" content="Experiencia Digital Jugable (El Viaje del Héroe) sobre la estabilidad del trabajo independiente en Colombia (GEIH DANE 2026). Por Santiago Sandoval y Sebastián Ramos." />
+  <link rel="stylesheet" href="css/typography.css?v=20261116" />
+  <link rel="stylesheet" href="css/accessibility.css?v=20261116" />
+  <link rel="stylesheet" href="css/treasure_game.css?v=20261116" />
+</head>
+<body>
+  <!-- Componente Modular 1: Pantalla de Portada -->
+  <div id="slot-portada" data-component="components/screen_portada.html">
+<!-- PANTALLA 1: PORTADA HEROICA DE BIENVENIDA -->
+<section id="screen-portada" class="game-screen active-screen" aria-label="Portada del Proyecto">
+  <div class="parchment-particles"></div>
+  <div class="portada-card">
+    <div class="portada-compass-badge" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="76" height="76">
+        <circle cx="50" cy="50" r="46" fill="#2A1B0E" stroke="#D99B26" stroke-width="3"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#D99B26" stroke-width="1" stroke-dasharray="4 3"/>
+        <polygon points="50,8 57,43 50,36 43,43" fill="#DC2626"/>
+        <polygon points="50,92 57,57 50,64 43,57" fill="#E2E8F0"/>
+        <polygon points="8,50 43,43 36,50 43,57" fill="#D99B26"/>
+        <polygon points="92,50 57,43 64,50 57,57" fill="#D99B26"/>
+        <circle cx="50" cy="50" r="6" fill="#FCD34D" stroke="#2A1B0E" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="portada-eyebrow">
+      <span>UNIVERSIDAD EXTERNADO DE COLOMBIA • VISUALIZACIÓN DE DATOS I • PROYECTO FINAL</span>
+    </div>
+
+    <h1 class="portada-title">
+      El Mito de la Inestabilidad Independiente
+    </h1>
+    <p class="portada-subtitle">
+      Una expedición interactiva por <strong>183.911 historias laborales reales</strong> (DANE — GEIH Enero a Julio 2026) para descubrir cuándo, dónde y para quién trabajar por cuenta propia en Colombia es sinónimo de incertidumbre o de verdadera libertad financiera.
+    </p>
+
+    <blockquote class="portada-quote">
+      “Trabajar como independiente en Colombia no es saltar al vacío: es sobrevolar un territorio donde la edad, el sector y la región trazan la frontera exacta entre la fragilidad y el éxito.”
+    </blockquote>
+
+    <div class="portada-authors">
+      <div class="author-pill">
+        <span class="author-icon">✈️</span>
+        <div>
+          <strong>Santiago Sandoval</strong>
+          <small>Capitán de Ciencia de Datos &amp; Cartografía</small>
+        </div>
+      </div>
+      <div class="author-pill">
+        <span class="author-icon">🧭</span>
+        <div>
+          <strong>Sebastián Ramos</strong>
+          <small>Capitán de Analítica &amp; Arquitectura Visual</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="portada-tech-badges">
+      <span class="tech-tag">📊 Power BI Ejecutivo</span>
+      <span class="tech-tag">🐍 Python (Seaborn &amp; Plotly)</span>
+      <span class="tech-tag">🗺️ R Espacial (sf &amp; Leaflet)</span>
+      <span class="tech-tag">📖 Storytelling: El Viaje del Héroe</span>
+    </div>
+
+    <div class="portada-actions">
+      <button id="btn-to-contexto" class="btn-treasure-primary" type="button" onclick="window.TreasureGame && window.TreasureGame.showScreen('contexto')">
+        <span>Pasar a la Experiencia Digital</span>
+        <span class="btn-arrow">➔</span>
+      </button>
+      <p class="portada-hint">Presiona <kbd>ENTER</kbd> o haz clic en el botón para abrir la bitácora de vuelo</p>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <!-- Componente Modular 2: Ventana Introductoria de Contexto y Briefing -->
+  <div id="slot-contexto" data-component="components/screen_contexto.html">
+<!-- PANTALLA 2: VENTANA INTRODUCTORIA DE CONTEXTO Y BRIEFING DE VUELO -->
+<section id="screen-contexto" class="game-screen" aria-label="Contexto de la Presentación y Briefing">
+  <div class="contexto-card">
+    <div class="contexto-header">
+      <span class="contexto-step-badge">BITÁCORA DE VUELO • INSTRUCCIONES DE LA EXPEDICIÓN</span>
+      <h2>Antes de Despegar: Tu Misión en el Mapa del Tesoro</h2>
+      <p>
+        Hemos transformado nuestra investigación estadística sobre la <strong>Gran Encuesta Integrada de Hogares (GEIH 2026)</strong> en una travesía interactiva 2D guiada bajo la estructura narrativa de <strong>El Viaje del Héroe</strong>.
+      </p>
+    </div>
+
+    <div class="contexto-grid">
+      <!-- Tarjeta 1: Contexto -->
+      <article class="brief-box">
+        <div class="brief-icon">📜</div>
+        <h3>1. El Contexto del Proyecto</h3>
+        <p>
+          En Colombia se repite un estigma: <em>“ser independiente es siempre inestable y precario”</em>. Analizamos <strong>7 meses de datos oficiales (Enero–Julio 2026, n = 183.911 ocupados)</strong> integrando <strong>Power BI, Python y R</strong> para demostrar con evidencia sencilla y visual que la inestabilidad depende de la edad, el oficio y la región.
+        </p>
+      </article>
+
+      <!-- Tarjeta 2: A quién manejaremos -->
+      <article class="brief-box">
+        <div class="brief-icon">🛩️</div>
+        <h3>2. ¿A Quién Manejaremos?</h3>
+        <p>
+          Pilotarás la <strong>Avioneta Cartográfica “Externado I”</strong> sobre un mapa 2D con cámara dinámica que avanza y retrocede contigo entre mares, montañas, bosques y ríos, guiando al protagonista desde el mundo de los rumores hacia el elixir de los datos reales.
+        </p>
+      </article>
+
+      <!-- Tarjeta 3: Cómo se distribuye -->
+      <article class="brief-box">
+        <div class="brief-icon">❌</div>
+        <h3>3. Las 6 Estaciones (X Rojas)</h3>
+        <p>
+          La ruta punteada roja conecta <strong>6 grandes X rojas</strong>. Al acercarte con la avioneta, la X se ilumina para que oprimas <strong>ESPACIO</strong> y explores el tablero de <strong>Power BI</strong>, las gráficas de <strong>Python</strong>, los mapas de <strong>R</strong> y el <strong>Simulador Ciudadano</strong> con su <em>Insight Clave</em>.
+        </p>
+      </article>
+
+      <!-- Tarjeta 4: Obstáculos del camino -->
+      <article class="brief-box">
+        <div class="brief-icon">🐙</div>
+        <h3>4. Obstáculos en la Ruta (Hover)</h3>
+        <p>
+          Entre las estaciones encontrarás <strong>5 peligros cartográficos</strong> (remolinos, el Kraken, bosques, serpientes y tormentas). <strong>Pasa el cursor encima</strong> de cada obstáculo para ver al instante una ficha resumida con el altercado real que enfrentamos y cómo lo solucionamos.
+        </p>
+      </article>
+    </div>
+
+    <div class="controls-banner">
+      <div class="control-item">
+        <div class="keys-group">
+          <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd>
+        </div>
+        <span>Usa las <strong>Flechas</strong> (o haz clic en el mapa) para volar: el mundo 2D se desplazará contigo.</span>
+      </div>
+      <div class="control-item">
+        <div class="keys-group">
+          <kbd class="kbd-space">ESPACIO</kbd>
+        </div>
+        <span>Oprime <strong>ESPACIO</strong> sobre una <strong>X Roja</strong> iluminada; pasa el <strong>mouse</strong> sobre los obstáculos.</span>
+      </div>
+    </div>
+
+    <div class="contexto-actions">
+      <button id="btn-back-portada" class="btn-treasure-secondary" type="button" onclick="window.TreasureGame && window.TreasureGame.showScreen('portada')">
+        ← Volver a Portada
+      </button>
+      <button id="btn-start-flight" class="btn-treasure-primary" type="button" onclick="window.TreasureGame && window.TreasureGame.showScreen('mapa')">
+        <span>Seguir al Mapa del Tesoro y Despegar</span>
+        <span class="btn-arrow">✈️</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <!-- Componente Modular 3: El Mapa del Tesoro Jugable con la Avioneta -->
+  <div id="slot-mapa" data-component="components/screen_mapa_juego.html">
+<!-- PANTALLA 3: EL MAPA DEL TESORO 2D CON CÁMARA DINÁMICA Y RELIEVE -->
+<section id="screen-mapa" class="game-screen" aria-label="Mapa del Tesoro Interactivo 2D">
+  <!-- HUD SUPERIOR DE NAVEGACIÓN Y PROGRESO -->
+  <header class="flight-hud">
+    <div class="hud-left">
+      <button id="btn-hud-briefing" class="hud-btn-ghost" type="button" title="Ver instrucciones de vuelo" onclick="window.TreasureGame && window.TreasureGame.showScreen('contexto')">
+        📜 Bitácora
+      </button>
+      <div class="hud-brand">
+        <span class="hud-title">🗺️ EXPEDICIÓN GEIH 2026: EL VIAJE DEL HÉROE</span>
+        <span id="hud-progress-text" class="hud-sub">Estaciones X: 0/6 • Obstáculos inspeccionados: 0/5</span>
+      </div>
+    </div>
+
+    <!-- Acceso directo a las 6 X rojas -->
+    <nav class="hud-quick-nav" aria-label="Saltos rápidos a estaciones del mapa">
+      <button class="hud-x-pill" data-target-node="x1" type="button" title="Estación 1: El Mundo Ordinario (Power BI)">❌ 1. Power BI</button>
+      <button class="hud-x-pill" data-target-node="x2" type="button" title="Estación 2: El Umbral del Promedio (Python)">❌ 2. Distribución</button>
+      <button class="hud-x-pill" data-target-node="x3" type="button" title="Estación 3: El Corredor Dorado (Python)">❌ 3. Ciclo Vida</button>
+      <button class="hud-x-pill" data-target-node="x4" type="button" title="Estación 4: Geografía del Riesgo (Mapas en R)">❌ 4. Mapas R</button>
+      <button class="hud-x-pill" data-target-node="x5" type="button" title="Estación 5: El Oráculo Ciudadano (Simulador + Plotly)">❌ 5. Simulador</button>
+      <button class="hud-x-pill" data-target-node="x6" type="button" title="Estación 6: El Elixir (Conclusiones y Cofre)">❌ 6. El Elixir</button>
+    </nav>
+
+    <div class="hud-right">
+      <button id="btn-next-waypoint" class="hud-btn-gold" type="button" title="Volar automáticamente a la siguiente estación X">
+        ✈️ Siguiente X
+      </button>
+    </div>
+  </header>
+
+  <!-- VENTANA DE CÁMARA 2D DEL JUEGO -->
+  <div id="treasure-map-viewport" class="treasure-map-viewport" tabindex="0" aria-label="Lienzo 2D del mapa del tesoro. Usa las flechas del teclado para volar por el mapa y Espacio sobre las X rojas.">
+
+    <!-- MUNDO 2D EXTENSO (3200 x 1800 px) QUE SE DESPLAZA CON LA AVIONETA -->
+    <div id="treasure-map-world" class="treasure-map-world">
+
+      <!-- CAPA SVG: MARES, BATIMETRÍA, RELIEVE TOPOGRÁFICO, CORDILLERAS, RÍOS, BOSQUES Y LUGARES -->
+      <svg class="treasure-map-svg" viewBox="0 0 3200 1800" width="3200" height="1800">
+        <defs>
+          <!-- Gradiente oceánico vintage -->
+          <radialGradient id="oceanGrad" cx="48%" cy="50%" r="65%">
+            <stop offset="0%" stop-color="#9EB7AC"/>
+            <stop offset="55%" stop-color="#84A196"/>
+            <stop offset="100%" stop-color="#5B7870"/>
+          </radialGradient>
+          <!-- Pergamino de tierra amarilla quemada -->
+          <radialGradient id="landParchment" cx="50%" cy="48%" r="60%">
+            <stop offset="0%" stop-color="#F6E6BD"/>
+            <stop offset="55%" stop-color="#E6C682"/>
+            <stop offset="88%" stop-color="#CA9A4E"/>
+            <stop offset="100%" stop-color="#AA7932"/>
+          </radialGradient>
+          <radialGradient id="highlandGrad" cx="45%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#EBD095"/>
+            <stop offset="100%" stop-color="#C89549"/>
+          </radialGradient>
+          <!-- Sombra costera de acantilado -->
+          <filter id="coastShadow" x="-8%" y="-8%" width="116%" height="116%">
+            <feDropShadow dx="8" dy="10" stdDeviation="10" flood-color="#2E443E" flood-opacity="0.55"/>
+          </filter>
+          <!-- Patrón de textura sutil de papel -->
+          <filter id="paperGrain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" result="noise"/>
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.06 0"/>
+          </filter>
+        </defs>
+
+        <!-- 1. MAR PROFUNDO Y BATIMETRÍA -->
+        <rect width="3200" height="1800" fill="url(#oceanGrad)"/>
+
+        <!-- Cuadrícula náutica y líneas de rumbo -->
+        <g stroke="#2C423B" stroke-opacity="0.20" stroke-width="1.2">
+          <line x1="0" y1="300" x2="3200" y2="300"/>
+          <line x1="0" y1="600" x2="3200" y2="600"/>
+          <line x1="0" y1="900" x2="3200" y2="900"/>
+          <line x1="0" y1="1200" x2="3200" y2="1200"/>
+          <line x1="0" y1="1500" x2="3200" y2="1500"/>
+          <line x1="400" y1="0" x2="400" y2="1800"/>
+          <line x1="800" y1="0" x2="800" y2="1800"/>
+          <line x1="1200" y1="0" x2="1200" y2="1800"/>
+          <line x1="1600" y1="0" x2="1600" y2="1800"/>
+          <line x1="2000" y1="0" x2="2000" y2="1800"/>
+          <line x1="2400" y1="0" x2="2400" y2="1800"/>
+          <line x1="2800" y1="0" x2="2800" y2="1800"/>
+          <!-- Líneas de rumbo desde la gran Rosa de los Vientos -->
+          <line x1="2850" y1="240" x2="0" y2="1120" stroke-dasharray="9 8"/>
+          <line x1="2850" y1="240" x2="350" y2="0" stroke-dasharray="9 8"/>
+          <line x1="2850" y1="240" x2="1150" y2="1800" stroke-dasharray="9 8"/>
+          <line x1="2850" y1="240" x2="2200" y2="1800" stroke-dasharray="9 8"/>
+        </g>
+
+        <!-- Olas marinas ilustradas -->
+        <g fill="none" stroke="#DCE8DE" stroke-width="2.2" stroke-linecap="round" opacity="0.45">
+          <path d="M 180,320 Q 205,305 230,320 T 280,320"/>
+          <path d="M 420,860 Q 445,845 470,860 T 520,860"/>
+          <path d="M 960,1180 Q 985,1165 1010,1180 T 1060,1180"/>
+          <path d="M 1030,720 Q 1055,705 1080,720 T 1130,720"/>
+          <path d="M 1520,250 Q 1545,235 1570,250 T 1620,250"/>
+          <path d="M 2180,1040 Q 2205,1025 2230,1040 T 2280,1040"/>
+          <path d="M 2580,290 Q 2605,275 2630,290 T 2680,290"/>
+          <path d="M 2840,1480 Q 2865,1465 2890,1480 T 2940,1480"/>
+          <path d="M 520,1640 Q 545,1625 570,1640 T 620,1640"/>
+        </g>
+
+        <!-- Zonas de aguas poco profundas (arrecifes / bajíos alrededor de las tierras) -->
+        <path d="M 120,1260 Q 260,1090 480,1180 T 660,1480 Q 430,1680 180,1600 Z" fill="#B7CBBF" opacity="0.55"/>
+        <path d="M 480,450 Q 670,250 930,380 T 1060,720 Q 790,880 510,760 Z" fill="#B7CBBF" opacity="0.55"/>
+        <path d="M 1090,740 Q 1400,560 1760,640 T 2180,1050 T 2650,1490 L 1880,1640 Q 1340,1680 1120,1360 Z" fill="#B7CBBF" opacity="0.52"/>
+        <path d="M 1710,280 Q 1980,160 2250,310 T 2260,600 Q 1960,690 1700,530 Z" fill="#B7CBBF" opacity="0.55"/>
+        <path d="M 2590,330 Q 2900,220 3100,450 L 3060,920 Q 2810,1080 2580,820 Z" fill="#B7CBBF" opacity="0.55"/>
+
+        <!-- 2. MASAS CONTINENTALES E ISLAS CON RELIEVE Y CURVAS DE NIVEL -->
+
+        <!-- Isla Suroeste: Puerto Promedio (X1) -->
+        <path d="M 155,1290 Q 275,1155 450,1215 T 585,1460 Q 430,1620 215,1560 Q 105,1440 155,1290 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4" filter="url(#coastShadow)"/>
+        <path d="M 205,1320 Q 300,1215 435,1265 T 520,1440 Q 400,1555 240,1510 Z"
+              fill="none" stroke="#9B6A2A" stroke-width="1.8" stroke-dasharray="5 4" opacity="0.65"/>
+
+        <!-- Península Noroeste: Cabo del Faro de la Mediana (X2) -->
+        <path d="M 530,480 Q 670,315 890,395 T 1015,690 Q 815,825 565,730 Q 470,605 530,480 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4" filter="url(#coastShadow)"/>
+        <path d="M 595,505 Q 705,385 855,445 T 940,655 Q 785,755 615,690 Z"
+              fill="none" stroke="#9B6A2A" stroke-width="1.8" stroke-dasharray="6 4" opacity="0.7"/>
+        <path d="M 655,545 Q 740,465 835,505 T 870,630 Q 770,690 665,640 Z"
+              fill="url(#highlandGrad)" stroke="#8B5A1E" stroke-width="1.5" opacity="0.75"/>
+
+        <!-- Gran Continente Central-Sur: Cordillera del Corredor Dorado (X3) hasta Meseta del Oráculo (X5) -->
+        <path d="M 1140,795 Q 1400,615 1745,675 Q 1930,720 2075,920 Q 2230,1045 2560,1070 Q 2710,1190 2645,1465 Q 2410,1625 2040,1555 Q 1630,1640 1245,1485 Q 1085,1235 1140,795 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4.5" filter="url(#coastShadow)"/>
+        <!-- Curvas de nivel topográficas (elevación escalonada) -->
+        <path d="M 1215,855 Q 1435,695 1720,745 Q 1890,790 2015,965 Q 2160,1085 2475,1120 Q 2585,1235 2530,1415 Q 2330,1535 2020,1485 Q 1650,1550 1300,1420 Q 1165,1200 1215,855 Z"
+              fill="none" stroke="#9A6826" stroke-width="2" stroke-dasharray="7 5" opacity="0.65"/>
+        <path d="M 1275,945 Q 1465,805 1690,855 Q 1815,955 1825,1160 Q 1790,1360 1535,1395 Q 1295,1375 1255,1170 Z"
+              fill="url(#highlandGrad)" stroke="#8A591D" stroke-width="2" opacity="0.82"/>
+        <path d="M 2275,1165 Q 2445,1135 2545,1255 Q 2565,1395 2425,1445 Q 2270,1435 2245,1295 Z"
+              fill="url(#highlandGrad)" stroke="#8A591D" stroke-width="1.8" opacity="0.78"/>
+
+        <!-- Archipiélago de los 33 Dominios (Norte-Centro: X4) -->
+        <g filter="url(#coastShadow)">
+          <path d="M 1765,330 Q 1935,215 2135,295 Q 2235,415 2145,555 Q 1975,620 1810,545 Q 1715,440 1765,330 Z"
+                fill="url(#landParchment)" stroke="#6B4214" stroke-width="4"/>
+          <path d="M 2165,245 Q 2255,210 2310,275 Q 2305,345 2225,360 Q 2145,325 2165,245 Z"
+                fill="url(#landParchment)" stroke="#6B4214" stroke-width="3"/>
+          <path d="M 1645,425 Q 1710,395 1745,455 Q 1730,520 1660,515 Q 1615,475 1645,425 Z"
+                fill="url(#landParchment)" stroke="#6B4214" stroke-width="3"/>
+          <path d="M 1835,360 Q 1945,280 2075,335 Q 2125,435 2050,510 Q 1925,545 1840,480 Z"
+                fill="none" stroke="#9B6A2A" stroke-width="1.6" stroke-dasharray="5 4"/>
+        </g>
+
+        <!-- Isla Noreste: Fortaleza del Elixir (X6) -->
+        <path d="M 2665,415 Q 2860,290 3045,410 Q 3120,575 3015,755 Q 2835,845 2685,720 Q 2595,565 2665,415 Z"
+              fill="url(#landParchment)" stroke="#6B4214" stroke-width="4.5" filter="url(#coastShadow)"/>
+        <path d="M 2725,455 Q 2865,360 2995,445 Q 3040,565 2965,690 Q 2840,760 2735,665 Z"
+              fill="url(#highlandGrad)" stroke="#8B5A1E" stroke-width="2" stroke-dasharray="6 4"/>
+
+        <!-- 3. CORDILLERAS MONTAÑOSAS CON SOMBREADO Y CUMBRES NEVADAS -->
+        <g>
+          <!-- Cordillera Central (cerca de X3) -->
+          <g transform="translate(1240, 1020)">
+            <polygon points="0,120 55,15 110,120" fill="#A97432" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="55,15 110,120 55,120" fill="#7D4F19"/>
+            <polygon points="41,42 55,15 69,42 55,36" fill="#FFFDF7"/>
+            <polygon points="85,135 150,0 215,135" fill="#B57E39" stroke="#5C380E" stroke-width="2.2"/>
+            <polygon points="150,0 215,135 150,135" fill="#7A4C17"/>
+            <polygon points="131,38 150,0 169,38 150,29" fill="#FFFDF7"/>
+            <polygon points="180,125 240,25 300,125" fill="#A97432" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="240,25 300,125 240,125" fill="#7D4F19"/>
+            <polygon points="224,52 240,25 256,52 240,45" fill="#FFFDF7"/>
+          </g>
+          <!-- Cordillera Oriental (cerca de X5) -->
+          <g transform="translate(2260, 1180)">
+            <polygon points="0,95 45,15 90,95" fill="#B57E39" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="45,15 90,95 45,95" fill="#7D4F19"/>
+            <polygon points="68,105 120,0 172,105" fill="#C08840" stroke="#5C380E" stroke-width="2"/>
+            <polygon points="120,0 172,105 120,105" fill="#7D4F19"/>
+            <polygon points="106,28 120,0 134,28 120,21" fill="#FFFDF7"/>
+          </g>
+          <!-- Cadena de Colinas Noroeste (cerca de X2) -->
+          <g transform="translate(615, 455)">
+            <polygon points="0,70 38,8 76,70" fill="#B57E39" stroke="#5C380E" stroke-width="1.8"/>
+            <polygon points="38,8 76,70 38,70" fill="#7D4F19"/>
+            <polygon points="56,75 95,15 134,75" fill="#A97432" stroke="#5C380E" stroke-width="1.8"/>
+            <polygon points="95,15 134,75 95,75" fill="#7D4F19"/>
+          </g>
+        </g>
+
+        <!-- 4. RÍOS SINUOSOS Y LAGUNAS -->
+        <g fill="none" stroke-linecap="round">
+          <!-- Río de la Experiencia (baja de la cordillera hasta el mar) -->
+          <path d="M 1450,1150 Q 1520,1250 1480,1365 T 1630,1520 T 1710,1625" stroke="#5E8C88" stroke-width="10" opacity="0.85"/>
+          <path d="M 1450,1150 Q 1520,1250 1480,1365 T 1630,1520 T 1710,1625" stroke="#9AC7C2" stroke-width="4" opacity="0.8"/>
+          <!-- Laguna Esmeralda -->
+          <ellipse cx="1870" cy="1340" rx="68" ry="38" fill="#6D9B95" stroke="#4D736E" stroke-width="2.5"/>
+          <path d="M 1870,1378 Q 1920,1470 1890,1585" stroke="#5E8C88" stroke-width="8" opacity="0.82"/>
+        </g>
+
+        <!-- 5. BOSQUES ILUSTRADOS (ARBOLES EN GRUPOS) -->
+        <g stroke="#2C421C" stroke-width="1.3">
+          <!-- Bosque de la Falacia (Centro, cerca de O3) -->
+          <g transform="translate(1545, 765)">
+            <circle cx="20" cy="25" r="18" fill="#5E7D41"/><circle cx="48" cy="18" r="20" fill="#4B6B31"/><circle cx="76" cy="28" r="17" fill="#6C8D4C"/>
+            <circle cx="34" cy="46" r="19" fill="#46632E"/><circle cx="62" cy="48" r="18" fill="#5E7D41"/><circle cx="96" cy="42" r="16" fill="#4B6B31"/>
+            <circle cx="10" cy="52" r="15" fill="#6C8D4C"/><circle cx="114" cy="25" r="15" fill="#5E7D41"/>
+          </g>
+          <!-- Selva Sur (alrededor de X3-X5) -->
+          <g transform="translate(1985, 1185)">
+            <circle cx="18" cy="22" r="17" fill="#5E7D41"/><circle cx="46" cy="16" r="21" fill="#4B6B31"/><circle cx="74" cy="28" r="18" fill="#6C8D4C"/>
+            <circle cx="32" cy="46" r="18" fill="#46632E"/><circle cx="62" cy="50" r="16" fill="#5E7D41"/>
+          </g>
+          <!-- Arboleda del Puerto (cerca de X1) -->
+          <g transform="translate(210, 1445)">
+            <circle cx="16" cy="20" r="14" fill="#5E7D41"/><circle cx="38" cy="15" r="16" fill="#4B6B31"/><circle cx="56" cy="26" r="14" fill="#6C8D4C"/>
+          </g>
+          <!-- Pinar del Faro (cerca de X2) -->
+          <g transform="translate(835, 515)">
+            <polygon points="15,0 3,28 27,28" fill="#46632E"/><polygon points="35,4 22,34 48,34" fill="#5E7D41"/><polygon points="55,2 43,30 67,30" fill="#4B6B31"/>
+          </g>
+        </g>
+
+        <!-- 6. LUGARES ILUSTRADOS Y HITOS CARTOGRÁFICOS -->
+        <!-- Barco Galeón en el Mar Occidental -->
+        <g transform="translate(460, 180)" opacity="0.85">
+          <path d="M 10,48 L 80,48 L 68,66 L 22,66 Z" fill="#6B3F16" stroke="#2A1808" stroke-width="2"/>
+          <line x1="45" y1="10" x2="45" y2="48" stroke="#2A1808" stroke-width="2.5"/>
+          <path d="M 46,12 Q 72,26 46,42 Z" fill="#FFFDF7" stroke="#784B16" stroke-width="1.5"/>
+          <path d="M 44,16 Q 22,28 44,40 Z" fill="#F6E6C2" stroke="#784B16" stroke-width="1.5"/>
+        </g>
+
+        <!-- Faro de la Mediana (junto a X2) -->
+        <g transform="translate(828, 560)">
+          <polygon points="12,38 24,38 21,8 15,8" fill="#FFFDF7" stroke="#2A1808" stroke-width="1.8"/>
+          <rect x="14" y="16" width="8" height="7" fill="#DC2626"/>
+          <circle cx="18" cy="6" r="5" fill="#FDE047" stroke="#2A1808" stroke-width="1.2"/>
+        </g>
+
+        <!-- Fortaleza del Elixir (junto a X6) -->
+        <g transform="translate(2955, 455)">
+          <rect x="0" y="14" width="44" height="28" fill="#C49A58" stroke="#4A2E0F" stroke-width="2"/>
+          <rect x="0" y="6" width="10" height="10" fill="#C49A58" stroke="#4A2E0F" stroke-width="1.5"/>
+          <rect x="17" y="6" width="10" height="10" fill="#C49A58" stroke="#4A2E0F" stroke-width="1.5"/>
+          <rect x="34" y="6" width="10" height="10" fill="#C49A58" stroke="#4A2E0F" stroke-width="1.5"/>
+          <path d="M 16,42 L 16,28 A 6,6 0 0,1 28,28 L 28,42 Z" fill="#4A2E0F"/>
+          <line x1="22" y1="-10" x2="22" y2="6" stroke="#2A1808" stroke-width="2"/>
+          <polygon points="22,-10 38,-5 22,0" fill="#DC2626"/>
+        </g>
+
+        <!-- Títulos Caligráficos de Mares, Cordilleras y Regiones -->
+        <text x="165" y="1140" fill="#2A1808" font-family="Georgia, serif" font-style="italic" font-size="25" font-weight="bold" opacity="0.7">Bahía de Puerto Promedio</text>
+        <text x="530" y="340" fill="#2A1808" font-family="Georgia, serif" font-style="italic" font-size="25" font-weight="bold" opacity="0.7">Mar del Umbral y Faro Mediana</text>
+        <text x="1220" y="1215" fill="#4A2E0F" font-family="Georgia, serif" font-style="italic" font-size="27" font-weight="bold" opacity="0.78">Cordillera del Corredor Dorado</text>
+        <text x="1485" y="742" fill="#2C421C" font-family="Georgia, serif" font-style="italic" font-size="24" font-weight="bold" opacity="0.82">Bosque de la Falacia Ecológica</text>
+        <text x="1770" y="235" fill="#1F3A34" font-family="Georgia, serif" font-style="italic" font-size="26" font-weight="bold" opacity="0.78">Archipiélago de los 33 Dominios (EPSG:9377)</text>
+        <text x="2280" y="1495" fill="#4A2E0F" font-family="Georgia, serif" font-style="italic" font-size="25" font-weight="bold" opacity="0.75">Meseta del Oráculo Ciudadano</text>
+        <text x="2680" y="365" fill="#4A2E0F" font-family="Georgia, serif" font-style="italic" font-size="26" font-weight="bold" opacity="0.8">Ciudadela del Elixir Final</text>
+
+        <!-- Rosa de los Vientos Monumental -->
+        <g transform="translate(2850, 240)">
+          <circle cx="0" cy="0" r="95" fill="#F6E6C2" fill-opacity="0.78" stroke="#6B4214" stroke-width="3"/>
+          <circle cx="0" cy="0" r="80" fill="none" stroke="#6B4214" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <polygon points="0,-90 14,-20 0,-32 -14,-20" fill="#DC2626"/>
+          <polygon points="0,90 14,20 0,32 -14,20" fill="#6B4214"/>
+          <polygon points="-90,0 -20,14 -32,0 -20,-14" fill="#6B4214"/>
+          <polygon points="90,0 20,14 32,0 20,-14" fill="#6B4214"/>
+          <circle cx="0" cy="0" r="10" fill="#F59E0B" stroke="#2A1808" stroke-width="2"/>
+          <text x="-8" y="-102" fill="#B91C1C" font-weight="bold" font-size="22" font-family="Georgia, serif">N</text>
+          <text x="-6" y="118" fill="#2A1808" font-weight="bold" font-size="18" font-family="Georgia, serif">S</text>
+          <text x="102" y="6" fill="#2A1808" font-weight="bold" font-size="18" font-family="Georgia, serif">E</text>
+          <text x="-120" y="6" fill="#2A1808" font-weight="bold" font-size="18" font-family="Georgia, serif">O</text>
+        </g>
+
+        <!-- 7. RUTA DEL TESORO (LÍNEA ROJA ENTRECORTADA CONECTANDO LAS 11 PARADAS EN 3200 x 1800) -->
+        <polyline
+          points="310,1410 560,1050 780,590 1090,930 1370,1290 1680,860 1960,440 2260,860 2490,1320 2750,950 2920,540"
+          fill="none"
+          stroke="#450A0A"
+          stroke-width="11"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="22 18"
+          opacity="0.28"
+        />
+        <polyline
+          id="treasure-route-line"
+          points="310,1410 560,1050 780,590 1090,930 1370,1290 1680,860 1960,440 2260,860 2490,1320 2750,950 2920,540"
+          fill="none"
+          stroke="#DC2626"
+          stroke-width="6.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="22 18"
+        />
+
+        <!-- Capa sutil de grano de pergamino -->
+        <rect width="3200" height="1800" filter="url(#paperGrain)" pointer-events="none"/>
+      </svg>
+
+      <!-- CAPA PARALLAX DE NUBES 2D -->
+      <div id="parallax-clouds-layer" class="parallax-clouds-layer" aria-hidden="true">
+        <div class="cloud-puff" style="left: 420px; top: 380px;"></div>
+        <div class="cloud-puff" style="left: 1180px; top: 240px;"></div>
+        <div class="cloud-puff" style="left: 1580px; top: 1180px;"></div>
+        <div class="cloud-puff" style="left: 2220px; top: 380px;"></div>
+        <div class="cloud-puff" style="left: 2740px; top: 1220px;"></div>
+      </div>
+
+      <!-- NODOS INTERACTIVOS DEL MAPA (6 X ROJAS + 5 OBSTÁCULOS) -->
+      <div id="map-nodes-layer" class="map-nodes-layer"></div>
+
+      <!-- VENTANITA RESUMIDA FLOTANTE AL PASAR EL CURSOR SOBRE UN OBSTÁCULO -->
+      <div id="obstacle-hover-card" class="obstacle-hover-card hidden" role="tooltip">
+        <div class="ohc-header">
+          <span id="ohc-icon" class="ohc-icon">🌀</span>
+          <div>
+            <span class="ohc-tag">OBSTÁCULO EN EL CAMINO</span>
+            <h4 id="ohc-title">Remolino del Promedio</h4>
+          </div>
+        </div>
+        <p class="ohc-row"><strong>⚠️ Altercado:</strong> <span id="ohc-problem"></span></p>
+        <p class="ohc-row ohc-sol"><strong>🛠️ Solución:</strong> <span id="ohc-solution"></span></p>
+      </div>
+
+      <!-- LA AVIONETA JUGABLE (BIPLANO "EXTERNADO I") -->
+      <div id="biplane-player" class="biplane-player" aria-label="Avioneta del jugador">
+        <div class="biplane-shadow"></div>
+        <div id="biplane-sprite" class="biplane-sprite">
+          <svg viewBox="0 0 120 120" width="72" height="72">
+            <line x1="8" y1="45" x2="26" y2="45" stroke="#FFFBEB" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <line x1="8" y1="75" x2="26" y2="75" stroke="#FFFBEB" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+            <polygon points="16,60 32,44 36,60 32,76" fill="#B91C1C" stroke="#450A0A" stroke-width="2"/>
+            <path d="M 24,52 L 88,50 C 98,50 104,55 104,60 C 104,65 98,70 88,70 L 24,68 Z" fill="#DC2626" stroke="#450A0A" stroke-width="2.5"/>
+            <rect x="46" y="14" width="26" height="92" rx="8" fill="#F59E0B" stroke="#450A0A" stroke-width="2.5"/>
+            <rect x="52" y="18" width="14" height="84" rx="5" fill="#FDE68A" opacity="0.55"/>
+            <circle cx="59" cy="28" r="6" fill="#0B3C5D" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="59" cy="92" r="6" fill="#0B3C5D" stroke="#FFFFFF" stroke-width="1.5"/>
+            <ellipse cx="44" cy="60" rx="8" ry="6" fill="#0B3C5D" stroke="#FDE68A" stroke-width="2"/>
+            <rect x="98" y="54" width="7" height="12" rx="2" fill="#334155" stroke="#0F172A" stroke-width="1.5"/>
+            <g class="propeller-spin" transform="translate(107, 60)">
+              <ellipse cx="0" cy="-14" rx="2.5" ry="13" fill="#E2E8F0" stroke="#475569" stroke-width="1"/>
+              <ellipse cx="0" cy="14" rx="2.5" ry="13" fill="#E2E8F0" stroke="#475569" stroke-width="1"/>
+              <circle cx="0" cy="0" r="3.5" fill="#F59E0B"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AVISO FLOTANTE DE PROXIMIDAD (SOLO PARA LAS X ROJAS) -->
+    <div id="proximity-banner" class="proximity-banner hidden" role="status" aria-live="polite">
+      <div class="proximity-glow-dot"></div>
+      <div class="proximity-info">
+        <span id="proximity-type" class="proximity-kicker">ESTACIÓN X ILUMINADA</span>
+        <strong id="proximity-title">Estación 1: El Mundo Ordinario</strong>
+      </div>
+      <button id="btn-open-active-node" class="btn-space-action" type="button">
+        Oprime <kbd>ESPACIO</kbd> para Entrar
+      </button>
+    </div>
+
+    <!-- MINI-MAPA RADAR DE POSICIÓN 2D -->
+    <div id="map-minimap" class="map-minimap" aria-label="Minimapa de ubicación en el mundo">
+      <div class="minimap-title">RADAR 2D</div>
+      <div id="minimap-canvas" class="minimap-canvas">
+        <div id="minimap-viewport-box" class="minimap-viewport-box"></div>
+        <div id="minimap-plane-dot" class="minimap-plane-dot"></div>
+      </div>
+    </div>
+
+    <!-- LEYENDA COMPACTA ABAJO A LA IZQUIERDA -->
+    <div class="map-legend-floating">
+      <div class="legend-row">
+        <span>❌</span>
+        <span><strong>X Rojas (1–6):</strong> Vuela cerca y oprime <kbd>ESPACIO</kbd> para abrir</span>
+      </div>
+      <div class="legend-row">
+        <span>🌀</span>
+        <span><strong>Obstáculos (1–5):</strong> Pasa el <strong>cursor encima</strong> para ver el resumen</span>
+      </div>
+      <div class="legend-row">
+        <span>✈️</span>
+        <span><strong>Flechas / Clic:</strong> El mundo 2D avanza y retrocede contigo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <!-- Componente Modular 4: Modales de las 6 Estaciones (X Rojas) y 5 Obstáculos -->
+  <div id="slot-modales" data-component="components/modal_estaciones.html">
+<!-- MODAL INTERACTIVO DE LAS 6 ESTACIONES (X ROJAS) — ESTILO ARMONIZADO PERGAMINO & ORO -->
+<div id="station-modal-backdrop" class="station-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-main-title">
+  <div class="station-modal-card">
+    <!-- Barra superior del modal -->
+    <header class="modal-topbar">
+      <div class="modal-stage-meta">
+        <span id="modal-hero-badge" class="modal-hero-badge">ETAPA 1 DEL VIAJE DEL HÉROE</span>
+        <h2 id="modal-main-title" class="modal-main-title">Título de la Estación</h2>
+      </div>
+      <div class="modal-top-actions">
+        <button id="btn-modal-prev" class="btn-modal-nav" type="button" title="Estación X anterior">← X Anterior</button>
+        <button id="btn-modal-next" class="btn-modal-nav btn-modal-nav-primary" type="button" title="Siguiente estación X">Siguiente X →</button>
+        <button id="btn-modal-close" class="btn-modal-close" type="button" title="Cerrar ventana y volver al mapa (ESC)">✕ Volver al Mapa</button>
+      </div>
+    </header>
+
+    <!-- Cuerpo desplazable del modal: las 6 estaciones X -->
+    <div class="modal-body-scroll">
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X1: EL MUNDO ORDINARIO Y EL LLAMADO (POWER BI EN VIVO)
+           ===================================================================== -->
+      <article id="panel-x1" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Nuestro protagonista quiere lanzarse a trabajar como independiente, pero todos le advierten que <em>“ganará poco y nunca tendrá estabilidad”</em>. Antes de rendirse ante el rumor, abre nuestro <strong>Monitor Interactivo en Power BI</strong> con los 183.911 registros oficiales del DANE (Enero–Julio 2026).
+        </p>
+
+        <div class="pbi-mini-kpis">
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Mediana Cuenta Propia</span>
+            <strong class="kpi-num kpi-amber">$1.200.000 COP</strong>
+            <small>Frente a $1.750.000 del asalariado (-31.4%)</small>
+          </div>
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Promedio General (Sesgado)</span>
+            <strong class="kpi-num kpi-oak">$2.474.617 COP</strong>
+            <small>Inflado por ingresos altos extremos (CV = 1.01)</small>
+          </div>
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Volatilidad Independiente</span>
+            <strong class="kpi-num kpi-ruby">CV = 1.182</strong>
+            <small>+11.2 pts más variable que asalariados (1.07)</small>
+          </div>
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Universo Analizado</span>
+            <strong class="kpi-num kpi-emerald">183.911 adultos</strong>
+            <small>85.608 independientes vs. 98.303 asalariados</small>
+          </div>
+        </div>
+
+        <div class="viz-showcase-card">
+          <div class="viz-card-header">
+            <span>📊 <strong>Tablero Interactivo Power BI Service:</strong> <code>Equipo_Sandoval_Ramos_Proyecto3</code></span>
+            <div class="viz-header-links">
+              <a href="https://app.powerbi.com/view?r=eyJrIjoiZjc3OGE4N2UtMTI3Ni00MGJlLWI1NTItZGU4NWRiZGM5NzRlIiwidCI6IjNiOTQ0ZDlhLTEwNTEtNDY4NS1iMDlkLTlhOTVlZTJkYmQ5OSIsImMiOjR9" target="_blank" rel="noopener" class="mini-dl-btn">↗ Abrir en Pantalla Completa</a>
+              <a href="../powerbi/medidas_dax_ponderadas.dax" download class="mini-dl-btn">⬇ Medidas DAX</a>
+            </div>
+          </div>
+          <div class="iframe-container-pbi">
+            <iframe
+              id="pbi-live-iframe"
+              title="Equipo_Sandoval_Ramos_Proyecto3"
+              src="https://app.powerbi.com/view?r=eyJrIjoiZjc3OGE4N2UtMTI3Ni00MGJlLWI1NTItZGU4NWRiZGM5NzRlIiwidCI6IjNiOTQ0ZDlhLTEwNTEtNDY4NS1iMDlkLTlhOTVlZTJkYmQ5OSIsImMiOjR9"
+              frameborder="0"
+              allowfullscreen="true"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #1</div>
+          <p>
+            <strong>El promedio es un espejismo:</strong> Mientras el promedio aparenta ser de <strong>$2,47 millones</strong>, el trabajador independiente típico (mediana) vive con <strong>$1,20 millones al mes</strong> (-31,4% frente al asalariado formal). La clave está en descubrir qué sectores, edades y regiones rompen esa brecha.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X2: EL CRUCE DEL UMBRAL (PYTHON — SEABORN FIGURA 1)
+           ===================================================================== -->
+      <article id="panel-x2" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Para no dejarse engañar por promedios mentirosos, nuestro héroe cruza el umbral hacia <strong>Python (<code>Seaborn</code>)</strong> y observa la distribución completa del ingreso peso a peso entre asalariados y cuenta propia.
+        </p>
+
+        <div class="viz-showcase-card">
+          <div class="viz-card-header">
+            <span>🐍 <strong>Visualización 2 (Python — Seaborn 300 DPI):</strong> Anatomía de la Brecha del Ingreso Laboral</span>
+            <span class="viz-tag-pill">Escala Logarítmica + Cuartiles P25–P75</span>
+          </div>
+          <div class="viz-img-wrapper">
+            <img src="assets/img/figura1_brecha_distribucion_seaborn.png" alt="Gráfica Seaborn comparando ingreso asalariado vs cuenta propia" class="viz-main-img zoomable-img" />
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #2</div>
+          <p>
+            <strong>Dos mundos dentro de la independencia:</strong> El empleo formal se concentra alrededor del salario mínimo, mientras que el trabajo independiente se estira hacia ambos extremos (<strong>CV = 1.18 vs. 1.07</strong>). La mitad central gana entre <strong>$500.000 (P25) y $2.000.000 (P75)</strong>.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X3: LAS PRUEBAS DEL CICLO DE VIDA (PYTHON — SEABORN FIGURA 2)
+           ===================================================================== -->
+      <article id="panel-x3" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Nuestro protagonista se pregunta: <em>“¿En qué etapa de la vida conviene más independizarse?”</em>. Al trazar la curva de ciclo de vida con intervalos Bootstrap en Python, descubre el secreto mejor guardado del mercado laboral colombiano.
+        </p>
+
+        <div class="viz-showcase-card">
+          <div class="viz-card-header">
+            <span>🐍 <strong>Visualización 3 (Python — Seaborn 300 DPI):</strong> Ciclo de Vida Laboral y el “Corredor Dorado”</span>
+            <span class="viz-tag-pill">Intervalos Bootstrap 95% (1.000 réplicas)</span>
+          </div>
+          <div class="viz-img-wrapper">
+            <img src="assets/img/figura2_ciclo_vida_bootstrap_seaborn.png" alt="Curva de ciclo de vida laboral mostrando el Corredor Dorado" class="viz-main-img zoomable-img" />
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #3</div>
+          <p>
+            <strong>El “Corredor Dorado” (35 a 44 años):</strong> Entre los 18 y 24 años, independizarse sin red de clientes ni ahorro produce alta fragilidad. Entre los <strong>35 y 44 años</strong> la experiencia acumulada impulsa el ingreso a su punto máximo de retorno y estabiliza el flujo mensual.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X4: LA EXPLORACIÓN DEL TERRITORIO (R ESPACIAL — SF Y LEAFLET)
+           ===================================================================== -->
+      <article id="panel-x4" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Desde la avioneta, el héroe despliega la cartografía oficial elaborada en <strong>R (<code>sf</code>, <code>ggplot2</code> y <code>leaflet</code>)</strong> en proyección nacional <code>EPSG:9377</code> sobre los 33 dominios departamentales de Colombia.
+        </p>
+
+        <div class="inner-tabs-bar">
+          <button class="inner-tab-btn active" data-tab-target="r-map-static" type="button">🗺️ Mapa Coroplético R (300 DPI — EPSG:9377)</button>
+          <button class="inner-tab-btn" data-tab-target="r-map-interactive" type="button">🌐 Explorador Interactivo Leaflet (Zoom &amp; Clic)</button>
+        </div>
+
+        <div id="r-map-static" class="inner-tab-pane active">
+          <div class="viz-showcase-card">
+            <div class="viz-card-header">
+              <span>🗺️ <strong>Visualización 4A (R — <code>sf</code> + <code>ggplot2</code>):</strong> Brecha Territorial de Volatilidad (ΔCV)</span>
+              <a href="../r_spatial/output/mapa_estabilidad_departamental.pdf" download class="mini-dl-btn">⬇ Descargar PDF Vectorial</a>
+            </div>
+            <div class="viz-img-wrapper">
+              <img src="assets/img/mapa_estabilidad_departamental.png" alt="Mapa coroplético departamental elaborado en R sf" class="viz-main-img zoomable-img" style="max-height: 500px;" />
+            </div>
+          </div>
+        </div>
+
+        <div id="r-map-interactive" class="inner-tab-pane hidden">
+          <div class="viz-showcase-card">
+            <div class="viz-card-header">
+              <span>🌐 <strong>Visualización 4B (R — <code>leaflet</code>):</strong> Haz zoom o clic sobre cada departamento</span>
+              <a href="assets/interactive/mapa_interactivo_tmap.html" target="_blank" rel="noopener" class="mini-dl-btn">↗ Abrir en Pantalla Completa</a>
+            </div>
+            <div class="iframe-container-map">
+              <iframe src="assets/interactive/mapa_interactivo_tmap.html" title="Mapa interactivo departamental en R Leaflet" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #4</div>
+          <p>
+            <strong>La paradoja territorial:</strong> ¡En <strong>12 de los 33 departamentos</strong> (tonos azules), ser independiente es igual o más estable (ΔCV ≤ 0) que ser asalariado! En cambio, <strong>Bogotá D.C. y Antioquia</strong> muestran mayor dispersión porque conviven consultores de altos ingresos con empleo informal de subsistencia.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X5: EL ORÁCULO DEL CIUDADANO (SIMULADOR + PLOTLY INTERACTIVO)
+           ===================================================================== -->
+      <article id="panel-x5" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> En el <strong>Oráculo de los Datos</strong>, cualquier ciudadano elige su oficio y edad para conocer al instante su ingreso esperado, riesgo y colchón de ahorro recomendado, y explora los 44 perfiles en <strong>Plotly</strong>.
+        </p>
+
+        <div class="inner-tabs-bar">
+          <button class="inner-tab-btn active" data-tab-target="sim-citizen-tool" type="button">🧮 Calculadora Interactiva para el Ciudadano</button>
+          <button class="inner-tab-btn" data-tab-target="sim-plotly-chart" type="button">📈 Mapa Interactivo de 44 Perfiles (Python Plotly)</button>
+        </div>
+
+        <div id="sim-citizen-tool" class="inner-tab-pane active">
+          <div class="citizen-sim-box">
+            <div class="sim-controls-row">
+              <div class="sim-field">
+                <label for="sim-sector-select">1. Elige tu Sector u Oficio Principal:</label>
+                <select id="sim-sector-select" class="sim-select"></select>
+              </div>
+              <div class="sim-field">
+                <label for="sim-age-select">2. Elige tu Rango de Edad:</label>
+                <select id="sim-age-select" class="sim-select"></select>
+              </div>
+            </div>
+
+            <div class="sim-results-grid">
+              <div class="sim-res-card">
+                <span class="sim-res-label">Ingreso Típico (Mediana P50)</span>
+                <strong id="sim-out-mediana" class="sim-res-value">$1.200.000</strong>
+                <small id="sim-out-iqr">Rango central (P25–P75): $600k – $2.1M</small>
+              </div>
+              <div class="sim-res-card">
+                <span class="sim-res-label">Volatilidad del Perfil (CV)</span>
+                <strong id="sim-out-cv" class="sim-res-value">0.85</strong>
+                <small id="sim-out-brecha">Brecha frente a asalariado: -20%</small>
+              </div>
+              <div class="sim-res-card">
+                <span class="sim-res-label">Semáforo de Estabilidad</span>
+                <strong id="sim-out-status" class="sim-res-badge">Estabilidad Moderada</strong>
+                <small id="sim-out-sample">Muestra real DANE: 1.000 encuestados</small>
+              </div>
+              <div class="sim-res-card sim-res-buffer">
+                <span class="sim-res-label">🛡️ Colchón Financiero Sugerido</span>
+                <strong id="sim-out-buffer" class="sim-res-value">3 a 5 meses</strong>
+                <small>Fondo de emergencia según dispersión</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sim-plotly-chart" class="inner-tab-pane hidden">
+          <div class="viz-showcase-card">
+            <div class="viz-card-header">
+              <span>📈 <strong>Visualización 5 (Python — <code>Plotly</code> Interactivo):</strong> Frontera Riesgo vs. Retorno (44 Perfiles)</span>
+              <a href="assets/interactive/simulador_independientes_plotly.html" target="_blank" rel="noopener" class="mini-dl-btn">↗ Abrir Plotly en Pantalla Completa</a>
+            </div>
+            <div class="iframe-container-map">
+              <iframe src="assets/interactive/simulador_independientes_plotly.html" title="Simulador interactivo Plotly de sectores y edades" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #5</div>
+          <p>
+            <strong>El oficio define la estrategia:</strong> Sectores especializados como <strong>Educación, Información y Servicios Profesionales</strong> pagan medianas altas (<strong>$2,0M–$2,6M</strong>) con volatilidad controlada (<strong>CV ≈ 0.75–0.89</strong>); en <strong>Comercio o Agropecuario</strong> un fondo de reserva de 3 a 5 meses blinda el hogar.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X6: EL REGRESO CON EL ELIXIR (SÍNTESIS, ÉTICA Y COFRE)
+           ===================================================================== -->
+      <article id="panel-x6" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Nuestro héroe completa el viaje. Ya no teme a los rumores: regresa con el <strong>Elixir del Conocimiento</strong>, tres reglas prácticas para el ciudadano, transparencia ética y el cofre de entregables reproducibles.
+        </p>
+
+        <div class="elixir-three-pillars">
+          <div class="elixir-pillar">
+            <span class="elixir-num">1</span>
+            <h3>Mira la Mediana, Nunca el Promedio</h3>
+            <p>Planea tu presupuesto con el ingreso mediano de tu sector (<strong>P50</strong>) y usa el cuartil 25 (<strong>P25</strong>) como tu piso para gastos fijos mensuales.</p>
+          </div>
+          <div class="elixir-pillar">
+            <span class="elixir-num">2</span>
+            <h3>Aprovecha el Corredor Dorado (35–54)</h3>
+            <p>La independencia rinde mejores frutos cuando capitalizas experiencia y red de clientes; en edades jóvenes, prioriza construir ahorro y habilidades especializadas.</p>
+          </div>
+          <div class="elixir-pillar">
+            <span class="elixir-num">3</span>
+            <h3>Ética Estadística Transparente</h3>
+            <p>Reportamos <strong>asociaciones reales observadas en la GEIH 2026</strong> (no promesas causales) y respetamos la escala departamental oficial del DANE sin extrapolar municipios.</p>
+          </div>
+        </div>
+
+        <div class="treasure-chest-box">
+          <h3>🏆 Cofre del Tesoro: Entregables Oficiales 100% Reproducibles</h3>
+          <div class="chest-links-grid">
+            <a href="../powerbi/Equipo_Sandoval_Ramos_Proyecto3.pbix" download class="chest-item">
+              <span>📊</span>
+              <div><strong>Power BI (.pbix)</strong><small>Tablero + Medidas DAX ponderadas</small></div>
+            </a>
+            <a href="../python/notebooks/Equipo_Sandoval_Ramos_Proyecto3_Notebook.ipynb" download class="chest-item">
+              <span>📓</span>
+              <div><strong>Jupyter Notebook (.ipynb)</strong><small>Pipeline Python ejecutado + Test Suite</small></div>
+            </a>
+            <a href="../r_spatial/scripts/mapa_territorial_geih_sf.R" download class="chest-item">
+              <span>🗺️</span>
+              <div><strong>Script Cartográfico (.R &amp; .Rmd)</strong><small>Código espacial sf + EPSG:9377</small></div>
+            </a>
+            <a href="../reports/Equipo_Sandoval_Ramos_Proyecto3_Presentacion_Narrativa.pdf" target="_blank" class="chest-item">
+              <span>📑</span>
+              <div><strong>Presentación Narrativa (PDF)</strong><small>10 diapositivas ejecutivas</small></div>
+            </a>
+            <a href="../reports/Equipo_Sandoval_Ramos_Proyecto3_Anexo_IA.pdf" target="_blank" class="chest-item">
+              <span>🤖</span>
+              <div><strong>Anexo Técnico de IA (PDF)</strong><small>Transparencia y verificación humana</small></div>
+            </a>
+            <a href="../data/raw_metadata/diccionario_variables_geih.md" target="_blank" class="chest-item">
+              <span>📚</span>
+              <div><strong>Diccionario y Metodología</strong><small>Fuentes DANE GEIH Ene–Jul 2026</small></div>
+            </a>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT FINAL DEL VIAJE DEL HÉROE</div>
+          <p>
+            <strong>Conclusión General:</strong> La inestabilidad del trabajo independiente en Colombia es un <strong>mito cuando se generaliza</strong>. Conocer la volatilidad del sector, aprovechar la etapa de madurez laboral y construir un colchón financiero convierte la incertidumbre en autonomía sostenible.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <footer class="modal-footer-bar">
+      <span class="modal-footer-tip">Tip: Presiona <kbd>ESC</kbd> o <kbd>ESPACIO</kbd> para volver a pilotar la avioneta por el mapa 2D.</span>
+      <button id="btn-modal-continue-flight" class="btn-treasure-primary btn-sm" type="button">
+        Seguir Volando por el Mapa ✈️
+      </button>
+    </footer>
+  </div>
+</div>
+
+  </div>
+
+  <!-- Módulos JavaScript Desacoplados -->
+  <script src="js/data_store.js?v=20261116"></script>
+  <script src="js/stations_data.js?v=20261116"></script>
+  <script src="js/simulator.js?v=20261116"></script>
+  <script src="js/game_engine.js?v=20261116"></script>
+  <script src="js/main.js?v=20261116"></script>
+</body>
+</html>

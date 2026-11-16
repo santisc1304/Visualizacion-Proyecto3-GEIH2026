@@ -1,0 +1,319 @@
+<!-- MODAL INTERACTIVO DE LAS 6 ESTACIONES (X ROJAS) — ESTILO ARMONIZADO PERGAMINO & ORO -->
+<div id="station-modal-backdrop" class="station-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-main-title">
+  <div class="station-modal-card">
+    <!-- Barra superior del modal -->
+    <header class="modal-topbar">
+      <div class="modal-stage-meta">
+        <span id="modal-hero-badge" class="modal-hero-badge">ETAPA 1 DEL VIAJE DEL HÉROE</span>
+        <h2 id="modal-main-title" class="modal-main-title">Título de la Estación</h2>
+      </div>
+      <div class="modal-top-actions">
+        <button id="btn-modal-prev" class="btn-modal-nav" type="button" title="Estación X anterior">← X Anterior</button>
+        <button id="btn-modal-next" class="btn-modal-nav btn-modal-nav-primary" type="button" title="Siguiente estación X">Siguiente X →</button>
+        <button id="btn-modal-close" class="btn-modal-close" type="button" title="Cerrar ventana y volver al mapa (ESC)">✕ Volver al Mapa</button>
+      </div>
+    </header>
+
+    <!-- Cuerpo desplazable del modal: las 6 estaciones X -->
+    <div class="modal-body-scroll">
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X1: EL MUNDO ORDINARIO Y EL LLAMADO (POWER BI EN VIVO)
+           ===================================================================== -->
+      <article id="panel-x1" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Nuestro protagonista quiere lanzarse a trabajar como independiente, pero todos le advierten que <em>“ganará poco y nunca tendrá estabilidad”</em>. Antes de rendirse ante el rumor, abre nuestro <strong>Monitor Interactivo en Power BI</strong> con los 183.911 registros oficiales del DANE (Enero–Julio 2026).
+        </p>
+
+        <div class="pbi-mini-kpis">
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Mediana Cuenta Propia</span>
+            <strong class="kpi-num kpi-amber">$1.200.000 COP</strong>
+            <small>Frente a $1.750.000 del asalariado (-31.4%)</small>
+          </div>
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Promedio General (Sesgado)</span>
+            <strong class="kpi-num kpi-oak">$2.474.617 COP</strong>
+            <small>Inflado por ingresos altos extremos (CV = 1.01)</small>
+          </div>
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Volatilidad Independiente</span>
+            <strong class="kpi-num kpi-ruby">CV = 1.182</strong>
+            <small>+11.2 pts más variable que asalariados (1.07)</small>
+          </div>
+          <div class="pbi-kpi-box">
+            <span class="kpi-lbl">Universo Analizado</span>
+            <strong class="kpi-num kpi-emerald">183.911 adultos</strong>
+            <small>85.608 independientes vs. 98.303 asalariados</small>
+          </div>
+        </div>
+
+        <div class="viz-showcase-card">
+          <div class="viz-card-header">
+            <span>📊 <strong>Tablero Interactivo Power BI Service:</strong> <code>Equipo_Sandoval_Ramos_Proyecto3</code></span>
+            <div class="viz-header-links">
+              <a href="https://app.powerbi.com/view?r=eyJrIjoiZjc3OGE4N2UtMTI3Ni00MGJlLWI1NTItZGU4NWRiZGM5NzRlIiwidCI6IjNiOTQ0ZDlhLTEwNTEtNDY4NS1iMDlkLTlhOTVlZTJkYmQ5OSIsImMiOjR9" target="_blank" rel="noopener" class="mini-dl-btn">↗ Abrir en Pantalla Completa</a>
+              <a href="../powerbi/medidas_dax_ponderadas.dax" download class="mini-dl-btn">⬇ Medidas DAX</a>
+            </div>
+          </div>
+          <div class="iframe-container-pbi">
+            <iframe
+              id="pbi-live-iframe"
+              title="Equipo_Sandoval_Ramos_Proyecto3"
+              src="https://app.powerbi.com/view?r=eyJrIjoiZjc3OGE4N2UtMTI3Ni00MGJlLWI1NTItZGU4NWRiZGM5NzRlIiwidCI6IjNiOTQ0ZDlhLTEwNTEtNDY4NS1iMDlkLTlhOTVlZTJkYmQ5OSIsImMiOjR9"
+              frameborder="0"
+              allowfullscreen="true"
+            ></iframe>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #1</div>
+          <p>
+            <strong>El promedio es un espejismo:</strong> Mientras el promedio aparenta ser de <strong>$2,47 millones</strong>, el trabajador independiente típico (mediana) vive con <strong>$1,20 millones al mes</strong> (-31,4% frente al asalariado formal). La clave está en descubrir qué sectores, edades y regiones rompen esa brecha.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X2: EL CRUCE DEL UMBRAL (PYTHON — SEABORN FIGURA 1)
+           ===================================================================== -->
+      <article id="panel-x2" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Para no dejarse engañar por promedios mentirosos, nuestro héroe cruza el umbral hacia <strong>Python (<code>Seaborn</code>)</strong> y observa la distribución completa del ingreso peso a peso entre asalariados y cuenta propia.
+        </p>
+
+        <div class="viz-showcase-card">
+          <div class="viz-card-header">
+            <span>🐍 <strong>Visualización 2 (Python — Seaborn 300 DPI):</strong> Anatomía de la Brecha del Ingreso Laboral</span>
+            <span class="viz-tag-pill">Escala Logarítmica + Cuartiles P25–P75</span>
+          </div>
+          <div class="viz-img-wrapper">
+            <img src="assets/img/figura1_brecha_distribucion_seaborn.png" alt="Gráfica Seaborn comparando ingreso asalariado vs cuenta propia" class="viz-main-img zoomable-img" />
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #2</div>
+          <p>
+            <strong>Dos mundos dentro de la independencia:</strong> El empleo formal se concentra alrededor del salario mínimo, mientras que el trabajo independiente se estira hacia ambos extremos (<strong>CV = 1.18 vs. 1.07</strong>). La mitad central gana entre <strong>$500.000 (P25) y $2.000.000 (P75)</strong>.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X3: LAS PRUEBAS DEL CICLO DE VIDA (PYTHON — SEABORN FIGURA 2)
+           ===================================================================== -->
+      <article id="panel-x3" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Nuestro protagonista se pregunta: <em>“¿En qué etapa de la vida conviene más independizarse?”</em>. Al trazar la curva de ciclo de vida con intervalos Bootstrap en Python, descubre el secreto mejor guardado del mercado laboral colombiano.
+        </p>
+
+        <div class="viz-showcase-card">
+          <div class="viz-card-header">
+            <span>🐍 <strong>Visualización 3 (Python — Seaborn 300 DPI):</strong> Ciclo de Vida Laboral y el “Corredor Dorado”</span>
+            <span class="viz-tag-pill">Intervalos Bootstrap 95% (1.000 réplicas)</span>
+          </div>
+          <div class="viz-img-wrapper">
+            <img src="assets/img/figura2_ciclo_vida_bootstrap_seaborn.png" alt="Curva de ciclo de vida laboral mostrando el Corredor Dorado" class="viz-main-img zoomable-img" />
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #3</div>
+          <p>
+            <strong>El “Corredor Dorado” (35 a 44 años):</strong> Entre los 18 y 24 años, independizarse sin red de clientes ni ahorro produce alta fragilidad. Entre los <strong>35 y 44 años</strong> la experiencia acumulada impulsa el ingreso a su punto máximo de retorno y estabiliza el flujo mensual.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X4: LA EXPLORACIÓN DEL TERRITORIO (R ESPACIAL — SF Y LEAFLET)
+           ===================================================================== -->
+      <article id="panel-x4" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Desde la avioneta, el héroe despliega la cartografía oficial elaborada en <strong>R (<code>sf</code>, <code>ggplot2</code> y <code>leaflet</code>)</strong> en proyección nacional <code>EPSG:9377</code> sobre los 33 dominios departamentales de Colombia.
+        </p>
+
+        <div class="inner-tabs-bar">
+          <button class="inner-tab-btn active" data-tab-target="r-map-static" type="button">🗺️ Mapa Coroplético R (300 DPI — EPSG:9377)</button>
+          <button class="inner-tab-btn" data-tab-target="r-map-interactive" type="button">🌐 Explorador Interactivo Leaflet (Zoom &amp; Clic)</button>
+        </div>
+
+        <div id="r-map-static" class="inner-tab-pane active">
+          <div class="viz-showcase-card">
+            <div class="viz-card-header">
+              <span>🗺️ <strong>Visualización 4A (R — <code>sf</code> + <code>ggplot2</code>):</strong> Brecha Territorial de Volatilidad (ΔCV)</span>
+              <a href="../r_spatial/output/mapa_estabilidad_departamental.pdf" download class="mini-dl-btn">⬇ Descargar PDF Vectorial</a>
+            </div>
+            <div class="viz-img-wrapper">
+              <img src="assets/img/mapa_estabilidad_departamental.png" alt="Mapa coroplético departamental elaborado en R sf" class="viz-main-img zoomable-img" style="max-height: 500px;" />
+            </div>
+          </div>
+        </div>
+
+        <div id="r-map-interactive" class="inner-tab-pane hidden">
+          <div class="viz-showcase-card">
+            <div class="viz-card-header">
+              <span>🌐 <strong>Visualización 4B (R — <code>leaflet</code>):</strong> Haz zoom o clic sobre cada departamento</span>
+              <a href="assets/interactive/mapa_interactivo_tmap.html" target="_blank" rel="noopener" class="mini-dl-btn">↗ Abrir en Pantalla Completa</a>
+            </div>
+            <div class="iframe-container-map">
+              <iframe src="assets/interactive/mapa_interactivo_tmap.html" title="Mapa interactivo departamental en R Leaflet" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #4</div>
+          <p>
+            <strong>La paradoja territorial:</strong> ¡En <strong>12 de los 33 departamentos</strong> (tonos azules), ser independiente es igual o más estable (ΔCV ≤ 0) que ser asalariado! En cambio, <strong>Bogotá D.C. y Antioquia</strong> muestran mayor dispersión porque conviven consultores de altos ingresos con empleo informal de subsistencia.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X5: EL ORÁCULO DEL CIUDADANO (SIMULADOR + PLOTLY INTERACTIVO)
+           ===================================================================== -->
+      <article id="panel-x5" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> En el <strong>Oráculo de los Datos</strong>, cualquier ciudadano elige su oficio y edad para conocer al instante su ingreso esperado, riesgo y colchón de ahorro recomendado, y explora los 44 perfiles en <strong>Plotly</strong>.
+        </p>
+
+        <div class="inner-tabs-bar">
+          <button class="inner-tab-btn active" data-tab-target="sim-citizen-tool" type="button">🧮 Calculadora Interactiva para el Ciudadano</button>
+          <button class="inner-tab-btn" data-tab-target="sim-plotly-chart" type="button">📈 Mapa Interactivo de 44 Perfiles (Python Plotly)</button>
+        </div>
+
+        <div id="sim-citizen-tool" class="inner-tab-pane active">
+          <div class="citizen-sim-box">
+            <div class="sim-controls-row">
+              <div class="sim-field">
+                <label for="sim-sector-select">1. Elige tu Sector u Oficio Principal:</label>
+                <select id="sim-sector-select" class="sim-select"></select>
+              </div>
+              <div class="sim-field">
+                <label for="sim-age-select">2. Elige tu Rango de Edad:</label>
+                <select id="sim-age-select" class="sim-select"></select>
+              </div>
+            </div>
+
+            <div class="sim-results-grid">
+              <div class="sim-res-card">
+                <span class="sim-res-label">Ingreso Típico (Mediana P50)</span>
+                <strong id="sim-out-mediana" class="sim-res-value">$1.200.000</strong>
+                <small id="sim-out-iqr">Rango central (P25–P75): $600k – $2.1M</small>
+              </div>
+              <div class="sim-res-card">
+                <span class="sim-res-label">Volatilidad del Perfil (CV)</span>
+                <strong id="sim-out-cv" class="sim-res-value">0.85</strong>
+                <small id="sim-out-brecha">Brecha frente a asalariado: -20%</small>
+              </div>
+              <div class="sim-res-card">
+                <span class="sim-res-label">Semáforo de Estabilidad</span>
+                <strong id="sim-out-status" class="sim-res-badge">Estabilidad Moderada</strong>
+                <small id="sim-out-sample">Muestra real DANE: 1.000 encuestados</small>
+              </div>
+              <div class="sim-res-card sim-res-buffer">
+                <span class="sim-res-label">🛡️ Colchón Financiero Sugerido</span>
+                <strong id="sim-out-buffer" class="sim-res-value">3 a 5 meses</strong>
+                <small>Fondo de emergencia según dispersión</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sim-plotly-chart" class="inner-tab-pane hidden">
+          <div class="viz-showcase-card">
+            <div class="viz-card-header">
+              <span>📈 <strong>Visualización 5 (Python — <code>Plotly</code> Interactivo):</strong> Frontera Riesgo vs. Retorno (44 Perfiles)</span>
+              <a href="assets/interactive/simulador_independientes_plotly.html" target="_blank" rel="noopener" class="mini-dl-btn">↗ Abrir Plotly en Pantalla Completa</a>
+            </div>
+            <div class="iframe-container-map">
+              <iframe src="assets/interactive/simulador_independientes_plotly.html" title="Simulador interactivo Plotly de sectores y edades" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT CLAVE #5</div>
+          <p>
+            <strong>El oficio define la estrategia:</strong> Sectores especializados como <strong>Educación, Información y Servicios Profesionales</strong> pagan medianas altas (<strong>$2,0M–$2,6M</strong>) con volatilidad controlada (<strong>CV ≈ 0.75–0.89</strong>); en <strong>Comercio o Agropecuario</strong> un fondo de reserva de 3 a 5 meses blinda el hogar.
+          </p>
+        </div>
+      </article>
+
+      <!-- =====================================================================
+           ❌ ESTACIÓN X6: EL REGRESO CON EL ELIXIR (SÍNTESIS, ÉTICA Y COFRE)
+           ===================================================================== -->
+      <article id="panel-x6" class="station-panel hidden">
+        <p class="simple-story-lead">
+          <strong>La historia:</strong> Nuestro héroe completa el viaje. Ya no teme a los rumores: regresa con el <strong>Elixir del Conocimiento</strong>, tres reglas prácticas para el ciudadano, transparencia ética y el cofre de entregables reproducibles.
+        </p>
+
+        <div class="elixir-three-pillars">
+          <div class="elixir-pillar">
+            <span class="elixir-num">1</span>
+            <h3>Mira la Mediana, Nunca el Promedio</h3>
+            <p>Planea tu presupuesto con el ingreso mediano de tu sector (<strong>P50</strong>) y usa el cuartil 25 (<strong>P25</strong>) como tu piso para gastos fijos mensuales.</p>
+          </div>
+          <div class="elixir-pillar">
+            <span class="elixir-num">2</span>
+            <h3>Aprovecha el Corredor Dorado (35–54)</h3>
+            <p>La independencia rinde mejores frutos cuando capitalizas experiencia y red de clientes; en edades jóvenes, prioriza construir ahorro y habilidades especializadas.</p>
+          </div>
+          <div class="elixir-pillar">
+            <span class="elixir-num">3</span>
+            <h3>Ética Estadística Transparente</h3>
+            <p>Reportamos <strong>asociaciones reales observadas en la GEIH 2026</strong> (no promesas causales) y respetamos la escala departamental oficial del DANE sin extrapolar municipios.</p>
+          </div>
+        </div>
+
+        <div class="treasure-chest-box">
+          <h3>🏆 Cofre del Tesoro: Entregables Oficiales 100% Reproducibles</h3>
+          <div class="chest-links-grid">
+            <a href="../powerbi/Equipo_Sandoval_Ramos_Proyecto3.pbix" download class="chest-item">
+              <span>📊</span>
+              <div><strong>Power BI (.pbix)</strong><small>Tablero + Medidas DAX ponderadas</small></div>
+            </a>
+            <a href="../python/notebooks/Equipo_Sandoval_Ramos_Proyecto3_Notebook.ipynb" download class="chest-item">
+              <span>📓</span>
+              <div><strong>Jupyter Notebook (.ipynb)</strong><small>Pipeline Python ejecutado + Test Suite</small></div>
+            </a>
+            <a href="../r_spatial/scripts/mapa_territorial_geih_sf.R" download class="chest-item">
+              <span>🗺️</span>
+              <div><strong>Script Cartográfico (.R &amp; .Rmd)</strong><small>Código espacial sf + EPSG:9377</small></div>
+            </a>
+            <a href="../reports/Equipo_Sandoval_Ramos_Proyecto3_Presentacion_Narrativa.pdf" target="_blank" class="chest-item">
+              <span>📑</span>
+              <div><strong>Presentación Narrativa (PDF)</strong><small>10 diapositivas ejecutivas</small></div>
+            </a>
+            <a href="../reports/Equipo_Sandoval_Ramos_Proyecto3_Anexo_IA.pdf" target="_blank" class="chest-item">
+              <span>🤖</span>
+              <div><strong>Anexo Técnico de IA (PDF)</strong><small>Transparencia y verificación humana</small></div>
+            </a>
+            <a href="../data/raw_metadata/diccionario_variables_geih.md" target="_blank" class="chest-item">
+              <span>📚</span>
+              <div><strong>Diccionario y Metodología</strong><small>Fuentes DANE GEIH Ene–Jul 2026</small></div>
+            </a>
+          </div>
+        </div>
+
+        <div class="insight-highlight-box">
+          <div class="insight-badge">💡 INSIGHT FINAL DEL VIAJE DEL HÉROE</div>
+          <p>
+            <strong>Conclusión General:</strong> La inestabilidad del trabajo independiente en Colombia es un <strong>mito cuando se generaliza</strong>. Conocer la volatilidad del sector, aprovechar la etapa de madurez laboral y construir un colchón financiero convierte la incertidumbre en autonomía sostenible.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <footer class="modal-footer-bar">
+      <span class="modal-footer-tip">Tip: Presiona <kbd>ESC</kbd> o <kbd>ESPACIO</kbd> para volver a pilotar la avioneta por el mapa 2D.</span>
+      <button id="btn-modal-continue-flight" class="btn-treasure-primary btn-sm" type="button">
+        Seguir Volando por el Mapa ✈️
+      </button>
+    </footer>
+  </div>
+</div>

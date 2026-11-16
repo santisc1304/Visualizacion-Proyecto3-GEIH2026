@@ -1,0 +1,316 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "p3viz020000000000002",
+  "position": {
+    "x": 724,
+    "y": 322,
+    "z": 4010,
+    "height": 736,
+    "width": 1172,
+    "tabOrder": 2010
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "SectorEconomico"
+                }
+              },
+              "queryRef": "Base_Analisis.SectorEconomico",
+              "nativeQueryRef": "SectorEconomico"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "GrupoEdad"
+                }
+              },
+              "queryRef": "Base_Analisis.GrupoEdad",
+              "nativeQueryRef": "GrupoEdad"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "DPTO_Nombre"
+                }
+              },
+              "queryRef": "Base_Analisis.DPTO_Nombre",
+              "nativeQueryRef": "DPTO_Nombre"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "Mediana Cuenta Propia"
+                }
+              },
+              "queryRef": "Base_Analisis.Mediana Cuenta Propia",
+              "nativeQueryRef": "Mediana Cuenta Propia"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "Mediana Asalariado"
+                }
+              },
+              "queryRef": "Base_Analisis.Mediana Asalariado",
+              "nativeQueryRef": "Mediana Asalariado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "CV Cuenta Propia"
+                }
+              },
+              "queryRef": "Base_Analisis.CV Cuenta Propia",
+              "nativeQueryRef": "CV Cuenta Propia"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "Semaforo Predictibilidad"
+                }
+              },
+              "queryRef": "Base_Analisis.Semaforo Predictibilidad",
+              "nativeQueryRef": "Semaforo Predictibilidad"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Base_Analisis"
+                    }
+                  },
+                  "Property": "Colchon Emergencia Sugerido"
+                }
+              },
+              "queryRef": "Base_Analisis.Colchon Emergencia Sugerido",
+              "nativeQueryRef": "Colchon Emergencia Sugerido"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Base_Analisis"
+                  }
+                },
+                "Property": "Mediana Cuenta Propia"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2CBA2'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFDF7'"
+                    }
+                  }
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A1808'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFDF7'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#D4B483'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Simulador de Bolsillo Ciudadano: Perfiles por Sector, Edad y Departamento'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A1808'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

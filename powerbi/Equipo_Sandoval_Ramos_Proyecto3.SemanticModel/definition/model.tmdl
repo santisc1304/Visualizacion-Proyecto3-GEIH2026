@@ -1,0 +1,22 @@
+model Model
+	culture: es-CO
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Base_Analisis"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Base_Analisis
+ref table Calendario
+ref table DateTableTemplate_4d387154-6386-4bdf-8f6f-2a4c135d912e
+ref table LocalDateTable_d778b86c-da1e-4316-a668-e807fe72e22c
+
+ref cultureInfo es-CO
+

@@ -1,0 +1,23 @@
+table Calendario
+	lineageTag: 74633be6-c538-4651-9b80-aef60fabf9a1
+
+	column Date
+		formatString: General Date
+		lineageTag: 4e356f00-2162-4800-8b6c-d61bc08d8621
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variación
+			isDefault
+			relationship: 4576dba9-cdb7-468d-a33d-e4956f3b45bb
+			defaultHierarchy: LocalDateTable_d778b86c-da1e-4316-a668-e807fe72e22c.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendario = calculated
+		mode: import
+		source = CALENDAR(DATE(2026,1,1), DATE(2026,7,31))
+
+	annotation PBI_Id = dc6b316d85bc4ab5a7ba8054e4be3c06
+

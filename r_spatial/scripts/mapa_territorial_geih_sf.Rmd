@@ -1,0 +1,125 @@
+---
+title: "Cartografía Temática Departamental — Proyecto 3: Narrativa Visual Integrada"
+subtitle: "Estabilidad Relativa del Ingreso Independiente vs. Asalariado (GEIH 2026 Ene-Jul)"
+author: "Santiago Sandoval & Sebastián Ramos — Universidad Externado de Colombia"
+date: "Noviembre 2026"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## 1. Propósito Analítico y Ética Territorial
+
+Este documento R Markdown reproduce el **Mapa 1 (Estático de Alta Resolución — 300 DPI)** y el **Mapa 2 (Explorador Territorial Interactivo — Leaflet)** que responden al **Acto III: La Geografía del Riesgo** dentro de nuestra narrativa visual integrada.
+
+- **Fuente de datos:** Gran Encuesta Integrada de Hogares (GEIH 2026, Enero a Julio — DANE) y Marco Geoestadístico Nacional (MGN DANE).
+- **Sistema de Referencia de Coordenadas (CRS):** Origen Nacional **MAGNA-SIRGAS (`EPSG:9377`)** para cartografía impresa y cálculo de centroides métricos; **`WGS84 (EPSG:4326)`** para renderizado web interactivo en Leaflet.
+- **Ética y Representatividad Muestral:** La GEIH posee inferencia estadísticamente representativa a nivel **Nacional, Regional, Departamental (33 dominios) y 23 Áreas Metropolitanas**, pero **no** a nivel de los 1.122 municipios individuales. Por rigor metodológico y para evitar la *falacia ecológica*, la cartografía se construye estrictamente a escala departamental.
+
+---
+
+## 2. Carga de Librerías y Datos Espaciales (`sf`)
+
+```{r libraries_and_data}
+library(sf)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(leaflet)
+library(htmlwidgets)
+library(scales)
+
+# Lectura del shapefile oficial departamental proyectado en EPSG:9377
+shp_path <- "../../data/geographic/MGN_DPTO_POLITICO.shp"
+csv_path <- "../../data/processed/metricas_departamentales.csv"
+
+dptos_sf <- st_read(shp_path, quiet = TRUE)
+metricas <- read_csv(csv_path, show_col_types = FALSE) %>%
+  mutate(DPTO_CCDGO = sprintf("%02d", as.integer(DPTO_CCDGO)))
+
+# Unión espacial por código DANE departamental (2 dígitos)
+dptos_joined <- dptos_sf %>%
+  left_join(metricas, by = c("DPTO_CC" = "DPTO_CCDGO")) %>%
+  mutate(
+    categoria_estabilidad = case_when(
+      is.na(delta_cv) ~ "Sin muestra GEIH",
+      delta_cv <= 0 ~ "1. Más estable o igual (ΔCV <= 0)",
+      delta_cv <= 0.15 ~ "2. Brecha moderada (0 < ΔCV <= 0.15)",
+      delta_cv <= 0.30 ~ "3. Brecha media-alta (0.15 < ΔCV <= 0.30)",
+      TRUE ~ "4. Alta volatilidad relativa (ΔCV > 0.30)"
+    )
+  )
+
+# Verificar CRS MAGNA-SIRGAS Origen Nacional (EPSG:9377)
+st_crs(dptos_joined)$epsg
+```
+
+---
+
+## 3. Mapa Estático de Alta Resolución (`ggplot2` + `geom_sf`)
+
+```{r static_map, fig.width=11, fig.height=12}
+paleta_colores <- c(
+  "1. Más estable o igual (ΔCV <= 0)" = "#0B3C5D",
+  "2. Brecha moderada (0 < ΔCV <= 0.15)" = "#328CC1",
+  "3. Brecha media-alta (0.15 < ΔCV <= 0.30)" = "#D99B26",
+  "4. Alta volatilidad relativa (ΔCV > 0.30)" = "#DC2626",
+  "Sin muestra GEIH" = "#E2E8F0"
+)
+
+# Selección de departamentos clave para anotación directa
+dptos_destacados <- dptos_joined %>%
+  filter(DPTO_CC %in% c("11", "05", "76", "08", "68", "13", "44", "19", "52")) %>%
+  mutate(
+    centroid = st_centroid(geometry),
+    coords = st_coordinates(centroid),
+    x = coords[, 1],
+    y = coords[, 2],
+    etiqueta = paste0(
+      nombre_dpto, "\nΔCV: ",
+      ifelse(delta_cv >= 0, paste0("+", round(delta_cv, 2)), round(delta_cv, 2))
+    )
+  )
+
+p_mapa <- ggplot(data = dptos_joined) +
+  geom_sf(aes(fill = categoria_estabilidad), color = "#FFFFFF", linewidth = 0.35) +
+  scale_fill_manual(
+    values = paleta_colores,
+    name = "Brecha de Volatilidad (ΔCV = CV Indep. - CV Asal.)",
+    drop = FALSE
+  ) +
+  geom_label(
+    data = dptos_destacados,
+    aes(x = x, y = y, label = etiqueta),
+    size = 2.6,
+    fontface = "bold",
+    fill = alpha("#FFFFFF", 0.85),
+    color = "#1E293B",
+    label.padding = unit(0.18, "lines"),
+    label.size = 0.25
+  ) +
+  labs(
+    title = "Geografía del Riesgo: ¿Dónde es más predecible trabajar por cuenta propia?",
+    subtitle = "Diferencia en el Coeficiente de Variación del ingreso laboral (ΔCV = CV Cuenta Propia - CV Asalariado) por departamento\nEn 12 de los 33 dominios departamentales, el trabajo independiente presenta menor o igual dispersión relativa que el empleo asalariado.",
+    caption = "Fuente: Elaboración propia con base en DANE - GEIH (Enero a Julio 2026, n = 183,911 adultos ocupados) y MGN DANE.\nSistema de Referencia de Coordenadas: MAGNA-SIRGAS / Origen-Nacional (EPSG:9377). Nota ética: No se desagrega a nivel municipal por representatividad muestral."
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.background = element_rect(fill = "#F8FAFC", color = NA),
+    panel.background = element_rect(fill = "#F8FAFC", color = NA),
+    panel.grid.major = element_line(color = "#E2E8F0", linewidth = 0.25, linetype = "dashed"),
+    plot.title = element_text(face = "bold", size = 15, color = "#0B3C5D"),
+    plot.subtitle = element_text(size = 10.5, color = "#475569"),
+    plot.caption = element_text(size = 8.5, color = "#64748B", hjust = 0),
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    legend.title = element_text(face = "bold", size = 9.5, color = "#0B3C5D"),
+    legend.text = element_text(size = 8.5, color = "#1E293B")
+  ) +
+  guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+
+p_mapa
+```
+

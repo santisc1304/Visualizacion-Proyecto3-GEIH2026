@@ -1,0 +1,12 @@
+{
+  "name": "proyecto3-narrativa-visual-integrada",
+  "version": "1.0.0",
+  "description": "Experiencia digital guiada (Modalidad B) sobre estabilidad salarial de trabajadores independientes en Colombia (GEIH 2026). Universidad Externado de Colombia.",
+  "scripts": {
+    "start": "python run_local_server.py",
+    "test": "python python/tests/verify_all_metrics.py"
+  },
+  "author": "Santiago Sandoval & Sebastián Ramos",
+  "license": "MIT"
+}
+

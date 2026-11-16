@@ -1,0 +1,261 @@
+table Base_Analisis
+	lineageTag: 1c9d1ee0-4022-4236-b6ba-ae4e68353f6d
+
+	measure 'Mediana de Ingreso' = MEDIAN(Base_Analisis[INGLABO])
+		formatString: $ #,##0
+		lineageTag: 291df1c1-7ce9-4e22-853e-a46a1209a124
+
+	measure 'Coef Variacion Ingreso' =
+			VAR Media = [Ingreso Promedio]
+			VAR Numerador = SUMX(Base_Analisis, Base_Analisis[FEX_C18] * ((Base_Analisis[INGLABO] - Media)^2))
+			VAR Denominador = SUM(Base_Analisis[FEX_C18])
+			RETURN DIVIDE(SQRT(DIVIDE(Numerador, Denominador, BLANK())), Media, BLANK())
+		formatString: 0.00
+		lineageTag: 05a87573-79c8-4ddf-942e-ffffa467e2d3
+
+	measure 'Ingreso Promedio' =
+			DIVIDE(
+				SUMX(Base_Analisis, Base_Analisis[INGLABO] * Base_Analisis[FEX_C18]),
+				SUM(Base_Analisis[FEX_C18]),
+				BLANK()
+			)
+		formatString: $ #,##0
+		lineageTag: f7467549-b7c0-468a-82ae-c6fd0255e079
+
+	measure 'Personas Analizadas' = COUNTROWS(Base_Analisis)
+		formatString: #,##0
+		lineageTag: 6be7fabd-d4a6-4465-8f0c-51aaca0df4c7
+
+	measure 'Brecha Cuenta Propia vs Asalariado' = DIVIDE([Ingreso Medio Cuenta Propia] - [Ingreso Medio Asalariado], [Ingreso Medio Asalariado])
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: 725f4b16-e51f-4164-a90c-f65e44d1267e
+
+	measure 'Variacion Mensual Ingreso %' =
+			VAR IngresoActual = [Ingreso Promedio]
+			VAR IngresoMesAnterior = CALCULATE([Ingreso Promedio], DATEADD(Calendario[Date], -1, MONTH))
+			RETURN DIVIDE(IngresoActual - IngresoMesAnterior, IngresoMesAnterior)
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: ca762f2f-085c-4d4b-9a94-27885b88a4f6
+
+	measure 'Poblacion Representada' = SUM(Base_Analisis[FEX_C18])
+		formatString: #,##0
+		lineageTag: d568a924-7812-577a-b2f1-03fe2eb834a0
+
+	measure 'Mediana Cuenta Propia' = CALCULATE(MEDIAN(Base_Analisis[INGLABO]), Base_Analisis[TipoTrabajador] = "Cuenta propia")
+		formatString: $ #,##0
+		lineageTag: bf37f08c-589a-5124-9a3c-99a564c3ec7d
+
+	measure 'Mediana Asalariado' = CALCULATE(MEDIAN(Base_Analisis[INGLABO]), Base_Analisis[TipoTrabajador] = "Asalariado")
+		formatString: $ #,##0
+		lineageTag: 8203a208-95bc-5843-bf32-4d600759932c
+
+	measure 'Ingreso Medio Cuenta Propia' = CALCULATE([Ingreso Promedio], Base_Analisis[TipoTrabajador] = "Cuenta propia")
+		formatString: $ #,##0
+		lineageTag: d4b015c0-55b6-5248-839f-e781a203ba69
+
+	measure 'Ingreso Medio Asalariado' = CALCULATE([Ingreso Promedio], Base_Analisis[TipoTrabajador] = "Asalariado")
+		formatString: $ #,##0
+		lineageTag: 1854dd99-5a58-57ff-a37b-4df724b55346
+
+	measure 'CV Cuenta Propia' = CALCULATE([Coef Variacion Ingreso], Base_Analisis[TipoTrabajador] = "Cuenta propia")
+		formatString: 0.00
+		lineageTag: 3c32c182-92d8-527d-bb52-db7f6027ba31
+
+	measure 'CV Asalariado' = CALCULATE([Coef Variacion Ingreso], Base_Analisis[TipoTrabajador] = "Asalariado")
+		formatString: 0.00
+		lineageTag: d4c0beeb-0cd5-5c53-aec5-4e57797e0a77
+
+	measure 'Brecha Mediana Indep vs Asal' = DIVIDE([Mediana Cuenta Propia] - [Mediana Asalariado], [Mediana Asalariado])
+		formatString: +0.0%;-0.0%;0.0%
+		lineageTag: b73b24f1-422f-562d-b0ae-bcd375f4a7cc
+
+	measure 'Delta CV Indep vs Asal' = [CV Cuenta Propia] - [CV Asalariado]
+		formatString: +0.00;-0.00;0.00
+		lineageTag: 32cf0e3b-f49b-5502-b885-b4f3f61313dc
+
+	measure 'Mediana Corredor Dorado' = CALCULATE([Mediana Cuenta Propia], Base_Analisis[GrupoEdad] = "35 a 54 años")
+		formatString: $ #,##0
+		lineageTag: 39d0ba6c-c6d5-5214-a947-0c485675d60d
+
+	measure 'Dptos Indep Mas Estable' =
+			COUNTROWS(
+				FILTER(
+					VALUES(Base_Analisis[DPTO_Nombre]),
+					NOT(ISBLANK([CV Cuenta Propia])) && NOT(ISBLANK([CV Asalariado])) && [CV Cuenta Propia] <= [CV Asalariado]
+				)
+			)
+		formatString: 0
+		lineageTag: cb886db2-e651-595c-b660-1d7ad323bc01
+
+	measure 'Semaforo Predictibilidad' =
+			VAR cv = [CV Cuenta Propia]
+			RETURN SWITCH(
+				TRUE(),
+				ISBLANK(cv), "Sin datos suficientes",
+				cv <= 0.75, "Alta Predictibilidad (Estable)",
+				cv <= 1.05, "Estabilidad Moderada",
+				"Alta Volatilidad (Estacional)"
+			)
+		lineageTag: 341a54a8-00cc-5c8e-a9f7-35b90e6fc2a4
+
+	measure 'Colchon Emergencia Sugerido' =
+			VAR cv = [CV Cuenta Propia]
+			RETURN SWITCH(
+				TRUE(),
+				ISBLANK(cv), "Evaluar perfil",
+				cv <= 0.75, "2 a 3 meses de reserva",
+				cv <= 1.05, "3 a 5 meses de reserva",
+				"6+ meses (ingreso variable)"
+			)
+		lineageTag: af5c1d23-3179-518d-a131-6f3f25bce322
+
+	measure 'Nombre Departamento' = COALESCE(SELECTEDVALUE(Base_Analisis[DPTO_Nombre]), "Nacional (33 Dptos.)")
+		lineageTag: 2ffe1ad4-fe07-593c-abe7-6733b847ac2d
+
+	column MES
+		dataType: int64
+		formatString: 0
+		lineageTag: 4cf439a5-83c5-4532-a383-7c3013ef723a
+		summarizeBy: sum
+		sourceColumn: MES
+
+	column DIRECTORIO
+		dataType: int64
+		formatString: 0
+		lineageTag: edd3109f-4db7-4212-ac5e-b5fc1852a5af
+		summarizeBy: none
+		sourceColumn: DIRECTORIO
+
+	column SECUENCIA_P
+		dataType: int64
+		formatString: 0
+		lineageTag: c2436131-5fde-4889-8a38-bc1cc4b2ed7b
+		summarizeBy: none
+		sourceColumn: SECUENCIA_P
+
+	column ORDEN
+		dataType: int64
+		formatString: 0
+		lineageTag: 407195c7-43b4-4c0b-aac4-cd3822c65833
+		summarizeBy: none
+		sourceColumn: ORDEN
+
+	column HOGAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 78f33600-dc99-41a8-9059-014317c80bcf
+		summarizeBy: none
+		sourceColumn: HOGAR
+
+	column DPTO
+		dataType: string
+		lineageTag: 8580229c-2aaf-434a-b214-170b1bffcc88
+		summarizeBy: none
+		sourceColumn: DPTO
+
+	column P6430
+		dataType: int64
+		formatString: 0
+		lineageTag: 11438280-2d76-4cb7-9374-4f2cbfe4d57e
+		summarizeBy: none
+		sourceColumn: P6430
+
+	column P6500
+		dataType: double
+		lineageTag: 3ef5e0db-fcec-4e3a-bfc8-b606098d03fd
+		summarizeBy: sum
+		sourceColumn: P6500
+
+	column RAMA2D_R4
+		dataType: string
+		lineageTag: 6a88abd0-7ed8-4aa4-898b-8a5e9b07f79a
+		summarizeBy: none
+		sourceColumn: RAMA2D_R4
+
+	column ID_Persona
+		dataType: string
+		lineageTag: 10e41194-f889-4da9-972d-6472f2f72ffd
+		summarizeBy: none
+		sourceColumn: ID_Persona
+
+	column TipoTrabajador
+		dataType: string
+		lineageTag: f4b410d4-ee88-4e16-bc6f-c881bdf48c9b
+		summarizeBy: none
+		sourceColumn: TipoTrabajador
+
+	column GrupoEdad
+		dataType: string
+		lineageTag: e64773fb-6920-462b-a5fc-0d4ed15fd5ef
+		summarizeBy: none
+		sourceColumn: GrupoEdad
+
+	column Sexo
+		dataType: string
+		lineageTag: 106abf0c-27ad-47c6-992b-e7feb671a663
+		summarizeBy: none
+		sourceColumn: Sexo
+
+	column Fecha = DATE(2026, Base_Analisis[MES], 1)
+		formatString: General Date
+		lineageTag: 7ac1043d-9e65-4661-a694-410da72171fc
+		summarizeBy: none
+
+	column FEX_C18
+		dataType: double
+		lineageTag: 131ac595-3a94-51b6-9772-38b47b8b25c0
+		summarizeBy: sum
+		sourceColumn: FEX_C18
+
+	column INGLABO
+		dataType: double
+		lineageTag: db37fa3c-3508-5182-a557-d64d726cf700
+		summarizeBy: sum
+		sourceColumn: INGLABO
+
+	column P3271
+		dataType: int64
+		formatString: 0
+		lineageTag: 3312cb56-2817-5f2a-9068-565032241f6e
+		summarizeBy: none
+		sourceColumn: P3271
+
+	column P6040
+		dataType: int64
+		formatString: 0
+		lineageTag: 6be008dc-5571-5e1d-bb5c-a3c086acece8
+		summarizeBy: none
+		sourceColumn: P6040
+
+	column DPTO_Nombre
+		dataType: string
+		lineageTag: 670c66d4-062c-56e2-bc9f-b34e44503d42
+		summarizeBy: none
+		sourceColumn: DPTO_Nombre
+
+	column SectorEconomico
+		dataType: string
+		lineageTag: 25dc9430-4b7f-41e2-bc64-23b5822e3af0
+		summarizeBy: none
+		sourceColumn: SectorEconomico
+
+	partition Base_Analisis = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents("C:\Users\santi\Desktop\TrabajosUEC\Visualización\Equipo_Sandoval_Ramos_Proyecto3\data\processed\base_geih_ciudadana_analisis.csv"), [Delimiter=",", Columns=19, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {
+				        {"MES", Int64.Type}, {"DIRECTORIO", Int64.Type}, {"SECUENCIA_P", Int64.Type},
+				        {"ORDEN", Int64.Type}, {"HOGAR", Int64.Type}, {"FEX_C18", type number},
+				        {"DPTO", type text}, {"P6430", Int64.Type}, {"P6500", type number},
+				        {"INGLABO", type number}, {"RAMA2D_R4", type text}, {"P3271", Int64.Type},
+				        {"P6040", Int64.Type}, {"DPTO_Nombre", type text}, {"SectorEconomico", type text},
+				        {"GrupoEdad", type text}, {"Sexo", type text}, {"TipoTrabajador", type text},
+				        {"ID_Persona", type text}
+				    }, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_NavigationStepName = Navegación
+

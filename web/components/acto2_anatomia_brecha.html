@@ -1,0 +1,57 @@
+<!-- acto2_anatomia_brecha.html - Acto 2: Evidencia Analítica en Python Seaborn -->
+<section id="evidencia" class="story-act">
+  <div class="container">
+    <span class="act-badge">Acto 2 · La Evidencia Empírica (Python Seaborn)</span>
+    <h2 class="takeaway-title">Anatomía de la Brecha: Ni Todos son Precarios, Ni Todos son Inestables</h2>
+    <p class="takeaway-subtitle">El mito se cae cuando examinamos la distribución real de los ingresos y el ciclo de vida laboral.</p>
+
+    <!-- Sub-bloque 1: Figura 1 Seaborn -->
+    <div class="act-grid act-grid-split" style="margin-bottom: 3.5rem;">
+      <div>
+        <h3 style="font-size: var(--text-xl); color: var(--color-primary); margin-bottom: 0.75rem;">
+          1. La Distribución Oculta tras los Promedios
+        </h3>
+        <p style="margin-bottom: 1rem; line-height: var(--line-normal);">
+          Los promedios tradicionales ocultan la verdad. Mientras los trabajadores asalariados (curvas azules) se concentran densamente alrededor de 1 salario mínimo legal ($1.42M COP) con poca dispersión, los trabajadores independientes (curvas doradas) presentan una estructura bimodal fascinante:
+        </p>
+        <ul style="padding-left: 1.25rem; line-height: 1.6; margin-bottom: 1.25rem; color: var(--color-text-body);">
+          <li><strong>Bolsas de Estabilidad Superior:</strong> En sectores como <em>Educación</em> (ingreso medio de $4.048.247 COP, CV = 0.71) y <em>Comercio</em> ($1.982.857 COP, CV = 0.80), el 25% superior de los independientes percibe ingresos muy superiores al promedio asalariado.</li>
+          <li><strong>Sectores Ancla de Regularidad:</strong> En <em>Alojamiento y Comida</em>, el coeficiente de variación es de apenas <strong>0.59</strong>, la menor dispersión salarial de toda la economía nacional.</li>
+          <li><strong>Sectores Montaña Rusa:</strong> En contraste, actividades como <em>Arte y Entretenimiento</em> (CV = 1.40) y <em>Minería</em> (CV = 1.19) evidencian una fuerte polarización de rentas individuales.</li>
+        </ul>
+      </div>
+
+      <div class="visual-frame">
+        <img src="assets/img/figura1_brecha_distribucion_seaborn.png" alt="Figura 1: Distribución continua y asimetría de ingresos en Colombia (Seaborn)" loading="lazy">
+        <div class="visual-caption">
+          <strong>Figura 1:</strong> Distribución continua de densidad salarial y percentiles (P25, P50, P75). Fuente: GEIH 2026 Ene-Jul (DANE).
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-bloque 2: Figura 2 Seaborn (Ciclo de Vida) -->
+    <div class="act-grid act-grid-split">
+      <div class="visual-frame">
+        <img src="assets/img/figura2_ciclo_vida_bootstrap_seaborn.png" alt="Figura 2: Ciclo de vida y Corredor Dorado de estabilidad en Colombia (Seaborn)" loading="lazy">
+        <div class="visual-caption">
+          <strong>Figura 2:</strong> Dinámica del ciclo vital con intervalos de confianza Bootstrap al 95%. Resaltado el Corredor Dorado (25-34 años).
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size: var(--text-xl); color: var(--color-primary); margin-bottom: 0.75rem;">
+          2. El "Corredor Dorado" de los 25 a los 34 Años
+        </h3>
+        <p style="margin-bottom: 1rem; line-height: var(--line-normal);">
+          ¿En qué momento de la vida laboral el independiente logra su punto óptimo de ingresos y predictibilidad? El análisis longitudinal y bootstrap al 95% revela tres etapas muy marcadas:
+        </p>
+        <ul style="padding-left: 1.25rem; line-height: 1.6; margin-bottom: 1.25rem; color: var(--color-text-body);">
+          <li><strong>La Juventud (18 a 24 años):</strong> El ingreso medio es modesto ($1.604.504 COP), pero el coeficiente de variación es el más bajo del ciclo de vida (<strong>0.62</strong>). La juventud está anclada a la remuneración legal mínima, lo que otorga una predictibilidad de flujo muy alta.</li>
+          <li><strong>El Corredor Dorado (25 a 34 años):</strong> 30.132 personas analizadas combinan un ingreso medio robusto ($2.272.458 COP) con un CV altamente competitivo de <strong>0.80</strong>. Es el momento de mayor solidez financiera relativa.</li>
+          <li><strong>La Madurez (35 años en adelante):</strong> Los ingresos promedio escalan hacia los $2.87M COP, pero la dispersión se dispara por encima de 1.10, aumentando la disparidad interna.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+

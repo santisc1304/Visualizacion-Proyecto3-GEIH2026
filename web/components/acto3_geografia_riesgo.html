@@ -1,0 +1,54 @@
+<!-- acto3_geografia_riesgo.html - Acto 3: Cartografía Espacial en R (sf + tmap) -->
+<section id="geografia" class="story-act">
+  <div class="container">
+    <span class="act-badge">Acto 3 · El Territorio (R sf & tmap)</span>
+    <h2 class="takeaway-title">La Geografía de la Estabilidad: La Paradoja de las Grandes Metrópolis</h2>
+    <p class="takeaway-subtitle">Por qué vivir en Bogotá o Medellín no garantiza un ingreso predecible frente a las regiones intermedias.</p>
+
+    <div class="act-grid act-grid-split">
+      <div>
+        <div class="callout-box" style="margin-top: 0;">
+          <strong>La Paradoja Metropolitana:</strong> En <strong>Bogotá D.C.</strong>, los independientes perciben el promedio de ingresos más alto de Colombia ($3.519.969 COP), pero al mismo tiempo registran <strong>la mayor volatilidad y disparidad económica de todo el país (CV = 1.26)</strong>.
+        </div>
+
+        <p style="margin-bottom: 1rem; line-height: var(--line-normal);">
+          Un fenómeno similar de alta incertidumbre se observa en otros grandes centros urbanos como Atlántico (CV = 1.14) y Valle del Cauca (CV = 1.09). En estas metrópolis, la abundancia agregada oculta una brecha feroz entre independientes de alta cualificación y trabajadores informales de subsistencia.
+        </p>
+
+        <p style="margin-bottom: 1.25rem; line-height: var(--line-normal);">
+          En contraste, los departamentos con mayor <strong>Índice de Predictibilidad Territorial</strong> no son las capitales densas, sino departamentos como <strong>Putumayo (CV = 0.47)</strong>, <strong>Amazonas (CV = 0.57)</strong>, <strong>San Andrés (CV = 0.63)</strong>, <strong>Arauca (CV = 0.69)</strong> y <strong>Risaralda (CV = 0.80)</strong>. En estas regiones, aunque los ingresos medios son más moderados, la estabilidad mes a mes es significativamente más homogénea y confiable.
+        </p>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="assets/interactive/mapa_interactivo_tmap.html" target="_blank" class="btn btn-primary">
+            🗺️ Abrir Mapa Interactivo en Pantalla Completa
+          </a>
+          <a href="../r_spatial/output/mapa_estabilidad_departamental.pdf" target="_blank" class="btn btn-secondary">
+            📄 Descargar Mapa Vectorial en PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="visual-frame">
+        <img src="assets/img/mapa_estabilidad_departamental.png" alt="Mapa de Predictibilidad Territorial de Ingresos en Colombia (R sf y tmap)" loading="lazy">
+        <div class="visual-caption">
+          <strong>Cartografía Oficial:</strong> Proyección Magna-Sirgas EPSG:9377 (Origen Nacional). Clasificación por quintiles de predictibilidad sobre 33 entidades territoriales.
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor del Mapa Interactivo Embebido -->
+    <div style="margin-top: 2.5rem;">
+      <h3 style="font-size: var(--text-lg); color: var(--color-primary); margin-bottom: 0.75rem;">
+        Exploración Interactiva Territorial (Leaflet / tmap)
+      </h3>
+      <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: 1rem;">
+        Pasa el cursor sobre cualquier departamento para consultar su ingreso medio, coeficiente de variación y brecha salarial:
+      </p>
+      <div class="iframe-container">
+        <iframe src="assets/interactive/mapa_interactivo_tmap.html" title="Mapa Interactivo Departamental de Colombia" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+

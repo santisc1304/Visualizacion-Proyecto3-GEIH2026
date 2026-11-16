@@ -1,0 +1,9 @@
+relationship 4576dba9-cdb7-468d-a33d-e4956f3b45bb
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendario.Date
+	toColumn: LocalDateTable_d778b86c-da1e-4316-a668-e807fe72e22c.Date
+
+relationship 0821b1f2-bd1b-0a85-5f03-104e3d407836
+	fromColumn: Base_Analisis.Fecha
+	toColumn: Calendario.Date
+

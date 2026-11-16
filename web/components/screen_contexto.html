@@ -1,0 +1,75 @@
+<!-- PANTALLA 2: VENTANA INTRODUCTORIA DE CONTEXTO Y BRIEFING DE VUELO -->
+<section id="screen-contexto" class="game-screen" aria-label="Contexto de la Presentación y Briefing">
+  <div class="contexto-card">
+    <div class="contexto-header">
+      <span class="contexto-step-badge">BITÁCORA DE VUELO • INSTRUCCIONES DE LA EXPEDICIÓN</span>
+      <h2>Antes de Despegar: Tu Misión en el Mapa del Tesoro</h2>
+      <p>
+        Hemos transformado nuestra investigación estadística sobre la <strong>Gran Encuesta Integrada de Hogares (GEIH 2026)</strong> en una travesía interactiva 2D guiada bajo la estructura narrativa de <strong>El Viaje del Héroe</strong>.
+      </p>
+    </div>
+
+    <div class="contexto-grid">
+      <!-- Tarjeta 1: Contexto -->
+      <article class="brief-box">
+        <div class="brief-icon">📜</div>
+        <h3>1. El Contexto del Proyecto</h3>
+        <p>
+          En Colombia se repite un estigma: <em>“ser independiente es siempre inestable y precario”</em>. Analizamos <strong>7 meses de datos oficiales (Enero–Julio 2026, n = 183.911 ocupados)</strong> integrando <strong>Power BI, Python y R</strong> para demostrar con evidencia sencilla y visual que la inestabilidad depende de la edad, el oficio y la región.
+        </p>
+      </article>
+
+      <!-- Tarjeta 2: A quién manejaremos -->
+      <article class="brief-box">
+        <div class="brief-icon">🛩️</div>
+        <h3>2. ¿A Quién Manejaremos?</h3>
+        <p>
+          Pilotarás la <strong>Avioneta Cartográfica “Externado I”</strong> sobre un mapa 2D con cámara dinámica que avanza y retrocede contigo entre mares, montañas, bosques y ríos, guiando al protagonista desde el mundo de los rumores hacia el elixir de los datos reales.
+        </p>
+      </article>
+
+      <!-- Tarjeta 3: Cómo se distribuye -->
+      <article class="brief-box">
+        <div class="brief-icon">❌</div>
+        <h3>3. Las 6 Estaciones (X Rojas)</h3>
+        <p>
+          La ruta punteada roja conecta <strong>6 grandes X rojas</strong>. Al acercarte con la avioneta, la X se ilumina para que oprimas <strong>ESPACIO</strong> y explores el tablero de <strong>Power BI</strong>, las gráficas de <strong>Python</strong>, los mapas de <strong>R</strong> y el <strong>Simulador Ciudadano</strong> con su <em>Insight Clave</em>.
+        </p>
+      </article>
+
+      <!-- Tarjeta 4: Obstáculos del camino -->
+      <article class="brief-box">
+        <div class="brief-icon">🐙</div>
+        <h3>4. Obstáculos en la Ruta (Hover)</h3>
+        <p>
+          Entre las estaciones encontrarás <strong>5 peligros cartográficos</strong> (remolinos, el Kraken, bosques, serpientes y tormentas). <strong>Pasa el cursor encima</strong> de cada obstáculo para ver al instante una ficha resumida con el altercado real que enfrentamos y cómo lo solucionamos.
+        </p>
+      </article>
+    </div>
+
+    <div class="controls-banner">
+      <div class="control-item">
+        <div class="keys-group">
+          <kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd>
+        </div>
+        <span>Usa las <strong>Flechas</strong> (o haz clic en el mapa) para volar: el mundo 2D se desplazará contigo.</span>
+      </div>
+      <div class="control-item">
+        <div class="keys-group">
+          <kbd class="kbd-space">ESPACIO</kbd>
+        </div>
+        <span>Oprime <strong>ESPACIO</strong> sobre una <strong>X Roja</strong> iluminada; pasa el <strong>mouse</strong> sobre los obstáculos.</span>
+      </div>
+    </div>
+
+    <div class="contexto-actions">
+      <button id="btn-back-portada" class="btn-treasure-secondary" type="button" onclick="window.TreasureGame && window.TreasureGame.showScreen('portada')">
+        ← Volver a Portada
+      </button>
+      <button id="btn-start-flight" class="btn-treasure-primary" type="button" onclick="window.TreasureGame && window.TreasureGame.showScreen('mapa')">
+        <span>Seguir al Mapa del Tesoro y Despegar</span>
+        <span class="btn-arrow">✈️</span>
+      </button>
+    </div>
+  </div>
+</section>

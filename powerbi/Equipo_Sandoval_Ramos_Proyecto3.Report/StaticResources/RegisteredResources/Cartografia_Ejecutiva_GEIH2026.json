@@ -1,0 +1,102 @@
+{
+  "name": "Cartografia_Ejecutiva_GEIH2026",
+  "dataColors": [
+    "#D97706",
+    "#0F3D5E",
+    "#DC2626",
+    "#15803D",
+    "#B45309",
+    "#784B16",
+    "#0284C7",
+    "#991B1B"
+  ],
+  "foreground": "#2A1808",
+  "foregroundNeutralSecondary": "#784B16",
+  "foregroundNeutralTertiary": "#A17C4C",
+  "background": "#FFFDF7",
+  "backgroundLight": "#F4E1B8",
+  "backgroundNeutral": "#E2CBA2",
+  "backgroundDark": "#2A1808",
+  "tableAccent": "#B45309",
+  "shapeStroke": "#D4B483",
+  "good": "#15803D",
+  "neutral": "#D97706",
+  "bad": "#DC2626",
+  "maximum": "#15803D",
+  "center": "#FBF4E3",
+  "minimum": "#DC2626",
+  "textClasses": {
+    "callout": {
+      "fontSize": 22,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#2A1808"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Georgia",
+      "color": "#2A1808"
+    },
+    "header": {
+      "fontSize": 11,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#2A1808"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#5C3A1B"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#FFFDF7"
+              }
+            }
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#D4B483"
+              }
+            },
+            "radius": 8
+          }
+        ],
+        "title": [
+          {
+            "fontColor": {
+              "solid": {
+                "color": "#2A1808"
+              }
+            },
+            "fontFamily": "Georgia",
+            "fontSize": 12
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FBF4E3"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}

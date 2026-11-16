@@ -1,0 +1,93 @@
+// ==============================================================================
+// MEDIDAS DAX PONDERADAS (PROYECTO 3: NARRATIVA VISUAL INTEGRADA)
+// ==============================================================================
+// Maestría en Ciencia de Datos | Universidad Externado de Colombia
+// Autores: Santiago Sandoval & Sebastián Ramos
+// 
+// Justificación Metodológica:
+// En el Proyecto 1 se utilizaron estimaciones muestrales no ponderadas. Para el
+// Proyecto 3, adaptado a la audiencia ciudadana y con el máximo rigor estadístico,
+// todas las medidas agregan el Factor de Expansión Censal (FEX_C18) del DANE.
+// Esto garantiza que cada cifra represente fielmente a la población colombiana.
+// ==============================================================================
+
+// ------------------------------------------------------------------------------
+// 1. POBLACIÓN REPRESENTADA EXPANDIDA
+// ------------------------------------------------------------------------------
+Poblacion_Representada = 
+SUM('Base_Analisis'[FEX_C18])
+
+// ------------------------------------------------------------------------------
+// 2. INGRESO MEDIO PONDERADO
+// ------------------------------------------------------------------------------
+Ingreso_Medio_Ponderado = 
+DIVIDE(
+    SUMX('Base_Analisis', 'Base_Analisis'[INGLABO] * 'Base_Analisis'[FEX_C18]),
+    SUM('Base_Analisis'[FEX_C18]),
+    BLANK()
+)
+
+// ------------------------------------------------------------------------------
+// 3. VARIANZA Y DESVIACIÓN ESTÁNDAR PONDERADA
+// ------------------------------------------------------------------------------
+Varianza_Ponderada = 
+VAR Media = [Ingreso_Medio_Ponderado]
+VAR Numerador = SUMX('Base_Analisis', 'Base_Analisis'[FEX_C18] * (('Base_Analisis'[INGLABO] - Media)^2))
+VAR Denominador = SUM('Base_Analisis'[FEX_C18])
+RETURN
+DIVIDE(Numerador, Denominador, BLANK())
+
+Desviacion_Estandar_Ponderada = 
+SQRT([Varianza_Ponderada])
+
+// ------------------------------------------------------------------------------
+// 4. COEFICIENTE DE VARIACIÓN PONDERADO (CV = σ / μ)
+// Métrica central de predictibilidad y volatilidad relativa de ingresos
+// ------------------------------------------------------------------------------
+CV_Ponderado = 
+DIVIDE([Desviacion_Estandar_Ponderada], [Ingreso_Medio_Ponderado], BLANK())
+
+// ------------------------------------------------------------------------------
+// 5. SEMÁFORO DE PREDICTIBILIDAD CIUDADANA
+// Categorización intuitiva para la audiencia ciudadana (reemplaza jerga de riesgo)
+// ------------------------------------------------------------------------------
+Semaforo_Predictibilidad_Ciudadana = 
+SWITCH(
+    TRUE(),
+    ISBLANK([CV_Ponderado]), "Sin datos suficientes",
+    [CV_Ponderado] <= 0.75, "Alta Predictibilidad (Flujo Estable)",
+    [CV_Ponderado] <= 1.05, "Estabilidad Moderada",
+    "Alta Variabilidad (Ingreso Volátil)"
+)
+
+// ------------------------------------------------------------------------------
+// 6. BRECHA SALARIAL INDEPENDIENTE VS. ASALARIADO (%)
+// Compara el ingreso medio ponderado del independiente frente al salario formal
+// ------------------------------------------------------------------------------
+Brecha_Ingreso_Indep_vs_Asal = 
+VAR Ingreso_Indep = 
+    CALCULATE(
+        [Ingreso_Medio_Ponderado],
+        'Base_Analisis'[TipoTrabajador] = "Cuenta propia"
+    )
+VAR Ingreso_Asal = 
+    CALCULATE(
+        [Ingreso_Medio_Ponderado],
+        'Base_Analisis'[TipoTrabajador] = "Asalariado"
+    )
+RETURN
+DIVIDE(Ingreso_Indep - Ingreso_Asal, Ingreso_Asal, BLANK())
+
+// ------------------------------------------------------------------------------
+// 7. FONDO DE RESERVA RECOMENDADO (COLCHÓN DE LIQUIDEZ)
+// Consejo ciudadano en meses de gasto de emergencia según el CV del perfil
+// ------------------------------------------------------------------------------
+Meses_Colchon_Emergencia = 
+SWITCH(
+    TRUE(),
+    ISBLANK([CV_Ponderado]), "Evaluar caso individual",
+    [CV_Ponderado] <= 0.75, "2 a 3 meses de gastos fijos",
+    [CV_Ponderado] <= 1.05, "3 a 5 meses de gastos fijos",
+    "6 meses o más (Actividad con ingresos altamente estacionales)"
+)
+
